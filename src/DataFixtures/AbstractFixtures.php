@@ -13,7 +13,7 @@ abstract class AbstractFixtures extends Fixture
     protected UserPasswordHasherInterface $passwordHasher;
     public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
-        $this->faker = Factory::create('fr_FR');
+        $this->faker = Factory::create('en_US');
         $this->passwordHasher = $passwordHasher;
     }
 }
