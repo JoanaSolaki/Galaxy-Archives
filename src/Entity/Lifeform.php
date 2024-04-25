@@ -233,4 +233,9 @@ class Lifeform
     {
         return $this->imageName;
     }
+
+    public function __toString(): string
+    {
+        return $this->name; // Pour renvoyer le nom de la créature dans le EasyAdmin
+    }
 }

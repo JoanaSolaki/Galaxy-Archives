@@ -18,10 +18,11 @@ class UserFixtures extends AbstractFixtures {
 
         for ($i = 0; $i < 10; $i++) {
             $user = new User();
-            $user->setEmail($this->faker->userName() . '@archives.com');
+            $userUsername = $this->faker->userName();
+            $user->setEmail($userUsername . '@archives.com');
             $user->setPassword($this->passwordHasher->hashPassword($user, $this->faker->randomNumber(5, true)));
             $user->setRoles([]);
-            $user->setUsername($this->faker->userName());
+            $user->setUsername($userUsername);
 
             $this->setReference('user_' . $i, $user);
 

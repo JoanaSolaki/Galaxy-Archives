@@ -251,4 +251,9 @@ class Planet
     {
         return $this->imageName;
     }
+
+    public function __toString(): string
+    {
+        return $this->name; // Pour renvoyer le nom de la planète dans le EasyAdmin
+    }
 }

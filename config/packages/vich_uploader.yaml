@@ -6,18 +6,18 @@ vich_uploader:
 
     mappings:
        avatar:
-           uri_prefix: /upload/images/avatar
-           upload_destination: '%kernel.project_dir%/public/upload/images/avatar'
+           uri_prefix: /uploads/images/avatar
+           upload_destination: '%kernel.project_dir%/public/uploads/images/avatar'
            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
        galaxy:
-           uri_prefix: /upload/images/galaxy
-           upload_destination: '%kernel.project_dir%/public/upload/images/galaxy'
+           uri_prefix: /uploads/images/galaxy
+           upload_destination: '%kernel.project_dir%/public/uploads/images/galaxy'
            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
        planets:
-           uri_prefix: /upload/images/planets
-           upload_destination: '%kernel.project_dir%/public/upload/images/planets'
+           uri_prefix: /uploads/images/planets
+           upload_destination: '%kernel.project_dir%/public/uploads/images/planets'
            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
        lifeform:
-           uri_prefix: /upload/images/lifeform
-           upload_destination: '%kernel.project_dir%/public/upload/images/lifeform'
+           uri_prefix: /uploads/images/lifeform
+           upload_destination: '%kernel.project_dir%/public/uploads/images/lifeform'
            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
