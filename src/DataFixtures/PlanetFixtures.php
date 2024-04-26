@@ -52,7 +52,7 @@ class PlanetFixtures extends AbstractFixtures implements DependentFixtureInterfa
             $planet->setName($this->faker->word());
             $planet->setType($this->faker->randomElement($typePlanet));
             $planet->setLifeCondition($this->faker->randomElement($lifeCondition));
-            $planet->setDescription($this->faker->text());
+            $planet->setDescription($this->faker->text(1000));
             $planet->setCreatedAt($this->faker->dateTimeBetween('-1 week', '+1 week'));
             $planet->setImageName($this->faker->randomElement($planetsImages));
             $planet->setAuthor($this->getReference('user_' . $this->faker->randomNumber(1, 9)));

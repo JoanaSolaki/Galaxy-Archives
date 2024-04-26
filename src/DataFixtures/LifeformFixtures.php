@@ -41,7 +41,7 @@ class LifeformFixtures extends AbstractFixtures implements DependentFixtureInter
             $lifeform->setName($this->faker->word());
             $lifeform->setSpecies($this->faker->randomElement($species));
             $lifeform->setBehavior($this->faker->randomElement($behavior));
-            $lifeform->setDescription($this->faker->text());
+            $lifeform->setDescription($this->faker->text(1000));
             $lifeform->setCreatedAt($this->faker->dateTimeBetween('-1 week', '+1 week'));
             $lifeform->setImageName($this->faker->randomElement($creaturesImages));
             $lifeform->setAuthor($this->getReference('user_' . $this->faker->randomNumber(1, 9)));

@@ -1,0 +1,82 @@
+:root {
+    --primaryColorRGB: rgba(13, 8, 29, 0.6);
+}
+
+.planetCard {
+    position: relative;
+    overflow: hidden;
+    width: 33%;
+    background-color: var(--primaryColorRGB);
+    background-blend-mode: color-dodge;
+    height: 400px;
+    padding: 20px 10px;
+    margin: 0 20px;
+    box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
+    color: var(--white);
+}
+
+.planetCard .planetImg {
+    position: absolute;
+    bottom: -30%;
+    left: 30%;
+    width: 100%;
+    mix-blend-mode: color-dodge;
+}
+
+.carousel-item a {
+    position: absolute;
+    bottom: 10%;
+}
+
+.planetCard h3 {
+    text-align: center;
+}
+
+.planetInfo li {
+    list-style-type: none;
+}
+
+@media (max-width: 767px) {
+    .carousel-inner .carousel-item > div {
+        display: none;
+    }
+    .carousel-inner .carousel-item > div:first-child {
+        display: block;
+    }
+}
+
+.carousel-inner {
+    margin: 0 auto;
+}
+
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+    display: flex;
+}
+
+/* medium and up screens */
+@media (min-width: 768px) {
+    
+    .carousel-inner .carousel-item-end.active,
+    .carousel-inner .carousel-item-next {
+      transform: translateX(33%);
+    }
+    
+    .carousel-inner .carousel-item-start.active, 
+    .carousel-inner .carousel-item-prev {
+      transform: translateX(-33%);
+    }
+}
+
+.carousel-inner .carousel-item-end,
+.carousel-inner .carousel-item-start { 
+  transform: translateX(0);
+}
+
+.carousel-control-prev {
+    left: -10%;
+}
+.carousel-control-next {
+    right: -10%;
+}

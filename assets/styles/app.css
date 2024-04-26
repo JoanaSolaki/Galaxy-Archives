@@ -1,3 +1,17 @@
-body {
-    background-color: skyblue;
+/*Rénitialiser pour tout les navigateurs*/
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box; /*permet d'inclure les bordures et les padding DANS la dimension*/
+}
+
+*:after {
+    box-sizing: border-box;
+  }
+
+a, abbr {
+    color: inherit;
+    text-decoration: none;
+    display: block;
 }

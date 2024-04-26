@@ -14,8 +14,8 @@ class GalaxyFixtures extends AbstractFixtures implements DependentFixtureInterfa
 
         $galaxyAndromeda = new Galaxy();
         $galaxyAndromeda->setName('Andromeda');
-        $galaxyAndromeda->setParticularities($this->faker->text());
-        $galaxyAndromeda->setDescription($this->faker->text());
+        $galaxyAndromeda->setParticularities($this->faker->text(1000));
+        $galaxyAndromeda->setDescription($this->faker->text(1000));
         $galaxyAndromeda->setCreatedAt($this->faker->dateTimeBetween('-1 week', '+1 week'));
         $galaxyAndromeda->setImageName('galaxyAndromeda.jpg');
         $galaxyAndromeda->setAuthor($this->getReference('user_' . $this->faker->randomNumber(1, 9)));
@@ -24,8 +24,8 @@ class GalaxyFixtures extends AbstractFixtures implements DependentFixtureInterfa
 
         $galaxyTadpole = new Galaxy();
         $galaxyTadpole->setName('Tadpole Galaxy');
-        $galaxyTadpole->setParticularities($this->faker->text());
-        $galaxyTadpole->setDescription($this->faker->text());
+        $galaxyTadpole->setParticularities($this->faker->text(1000));
+        $galaxyTadpole->setDescription($this->faker->text(1000));
         $galaxyTadpole->setCreatedAt($this->faker->dateTimeBetween('-1 week', '+1 week'));
         $galaxyTadpole->setImageName('galaxyTadpole.jpg');
         $galaxyTadpole->setAuthor($this->getReference('user_' . $this->faker->randomNumber(1, 9)));

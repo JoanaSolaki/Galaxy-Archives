@@ -1,0 +1,259 @@
+:root {
+    --primaryColor: #0D081D;
+    --secondaryColor: #2F1C58;
+    --tertiaryColor: #AC94B8;
+    --white: white;
+}
+
+body {
+    font-family: "Comfortaa", sans-serif; 
+    color: var(--white);
+    background: linear-gradient(180deg, rgba(13,8,29,1) 0%, rgba(47,28,88,1) 100%), fixed;
+    background-size: cover;
+    line-height: 1.8em;
+}
+
+.wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.container-fluid {
+    max-width: 1000px;
+}
+
+main {
+    min-height: calc(100vh - 80px);
+}
+
+h1, h2, h3 {
+    font-family: "Bruno Ace", sans-serif;
+}
+
+h1 {
+    font-size: 6em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    margin: 40px 0 10px 0;
+}
+
+.megrim-regular {
+    font-family: "Megrim", system-ui;
+    font-size: 5em;
+}
+
+.brunoAce {
+    font-family: "Bruno Ace", sans-serif;
+}
+
+.btn {
+    font-family: "Bruno Ace", sans-serif;
+    padding: 6px 12px;
+    border-radius: 10px;
+    text-align: center;
+    object-fit: contain;
+    text-transform: lowercase;
+}
+
+.btn_full {
+    background-color: var(--white);
+    color: var(--secondaryColor);
+}
+
+.btn_outline {
+    background-color: none;
+    border: 1px solid var(--white);
+    color: var(--white);
+}
+
+.btn_center {
+    display: block;
+    width: fit-content;
+    margin: 60px auto;
+}
+
+.btn_full:hover {
+    background-color: var(--secondaryColor);
+    color: var(--white);
+}
+
+.btn_outline:hover {
+    background-color: var(--white);
+    border: 1px solid var(--white);
+    color: var(--secondaryColor);
+}
+
+/* NAVBAR */
+
+.navbar {
+    height: 80px;
+    background-color: none!important;
+    align-items: center;
+}
+
+.navbar a {
+    font-family: "Comfortaa", sans-serif;
+    margin: auto 4px;
+    text-transform: capitalize;
+}
+
+/* HEADER */
+
+.homepage {
+    background-image: url(../img/bg_header.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center, left;
+    mix-blend-mode: lighten;
+    height: 100vh;
+}
+
+.homepage h1 {
+    position: relative;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%,-50%);
+    width: fit-content;
+}
+
+/* GALAXY */
+
+.galaxyCard {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    margin-bottom: 40px;
+    overflow: hidden;
+}
+
+.galaxyCard img {
+    width: 100%;
+}
+ 
+.galaxyInfo {
+    background-color: var(--primaryColor);
+    position: absolute;
+    width: 500px;
+    height: 100%;
+    top: 0%;
+    right: 0%;
+    padding: 60px 40px;
+}
+
+.galaxyCard h2 {
+    font-size: 3em;
+    margin-bottom: 40px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+}
+
+.galaxyInfo ul {
+    margin-bottom: 40px;
+}
+
+.galaxyHead {
+    position: relative;
+    overflow: hidden;
+    min-width: 100%;
+    height: calc(100vh - 80px);
+}
+
+.galaxyHead img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.galaxyHead h1 {
+    position: absolute;
+    bottom: -3.7%;
+    left: 16%;
+}
+
+/* PLANET */
+
+.reportBtn {
+    background-image: url(../img/blackhole.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center, center;
+    mix-blend-mode: color-dodge;
+    height: 600px;
+    position: relative;
+    margin: 40px 0;
+}
+
+.reportBtn a {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: fit-content;
+}
+
+.planetHead img {
+    max-width: 50%;
+    height: 100%;
+    margin-top: 140px;
+}
+
+.lifeformHead img {
+    max-width: 50%;
+    height: 100%;
+    margin-top: 200px;
+}
+
+.planetHeadInfo, .lifeformHeadInfo {
+    margin: 40px 0;
+    width: 50%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+}
+
+.planetLifeform {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.planetLifeform div {
+    width: 60%;
+}
+
+.planetLifeform a {
+    display: contents;
+    overflow: hidden;
+}
+
+.planetLifeform img {
+    width: 36%;
+    height: 100%;
+    transition: 300ms;
+}
+
+.planetLifeform img:hover {
+    filter: brightness(40%);
+    transform: scale(1.1);
+}
+
+/* LIFEFORM */
+
+/* FOOTER */
+
+footer {
+    background-color: var(--primaryColor);
+    color: var(--white);
+    text-align: center;
+    font-size: 0.8em;
+    height: 80px;
+    position: relative;
+}
+
+footer p {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}

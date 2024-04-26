@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<section class="lifeformHead wrapper d-flex">
+    <div class="lifeformHeadInfo">
+        <h1> {{ lifeform.name|upper }} </h1>
+        <p><span class="brunoAce">Name :</span> {{ lifeform.name }}</p>
+        <p><span class="brunoAce">Species :</span> {{ lifeform.species }}</p>
+        <p><span class="brunoAce">Behavior :</span> {{ lifeform.behavior }}</p>
+
+        <p>created by 
+            <a href="" class="d-inline">{{ lifeform.author.username }}</a>, 
+            the {{ lifeform.createdAt|date('d-m-Y') }}
+            {% if lifeform.updatedAt != null %}
+            , updated the  {{ lifeform.updatedAt|date('d-m-Y') }}  at  {{ lifeform.updatedAt|date('H:i') }}
+            {% endif %}
+        </p>
+
+    </div>
+    <img src={{ vich_uploader_asset(lifeform, 'imageFile') }}  alt="image lifeform"></img>
+</section>
+
+<section class="lifeformBody wrapper">
+    <article>
+        <h2>Description :</h2>
+        <p> {{ lifeform.description }} </p>
+
+        <a href="" class="btn btn_outline btn_center">edit this lifeform</a>
+    </article>
+</section>
+
+
+<section class="reports">
+    {% for report in lifeform.reportlifeforms %}
+        <article class="report">
+            <h3>Report form
+                <a href="" class="d-inline">{{ report.author.username }}</a>, 
+                the {{ report.createdAt|date('d-m-Y') }} at {{ report.createdAt|date('H:i') }}
+                {% if report.updatedAt != null %}
+                , updated the  {{ report.updatedAt|date('d-m-Y') }}  at  {{ report.updatedAt|date('H:i') }}
+                {% endif %}
+            </h3>
+            <p> {{ report.body }} </p>
+        </article>
+    {% endfor %}
+    <a href="" class="btn btn_outline btn_center">create a report</a>
+</section>
+{% endblock %}
