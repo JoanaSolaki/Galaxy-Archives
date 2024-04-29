@@ -46,7 +46,7 @@ class PlanetType extends AbstractType
             ])
             ->add('description', TextareaType::class, [
                 'attr' => array(
-                    'placeholder' => 'Enter your description of the planet.'
+                    'placeholder' => 'Enter your description of your planet.'
                 )
             ])
             ->add('galaxy', EntityType::class, [

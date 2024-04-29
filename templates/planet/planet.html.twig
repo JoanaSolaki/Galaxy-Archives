@@ -3,7 +3,7 @@
 {% block title %} {{ planet.name }} {% endblock %}
 
 
-{% block body %}
+{% block main %}
 <section class="planetHead wrapper d-flex">
     <div class="planetHeadInfo">
         <h1> {{ planet.name|upper }} </h1>
@@ -40,7 +40,7 @@
             </div>
         {% endfor %}
 
-        <a href="" class="btn btn_outline btn_center">report a lifeform</a>
+        <a href="{{ path('lifeform.create') }}" class="btn btn_outline btn_center">report a lifeform</a>
     </article>
 </section>
 

@@ -2,7 +2,7 @@
 
 {% block title %}Create Lifeform{% endblock %}
 
-{% block body %}
+{% block main %}
 
 {% if app.user == null %}
     <script>
@@ -10,7 +10,7 @@
     </script>
 {% endif %}
 
-    <h1>Create new Lifeform</h1>
+    <h1>Create Lifeform</h1>
 
     {{ include('lifeform/_form.html.twig') }}
 

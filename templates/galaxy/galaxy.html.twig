@@ -2,7 +2,7 @@
 
 {% block title %} {{ galaxy.name }} {% endblock %}
 
-{% block body %}
+{% block main %}
 <section class="galaxyHead">
     <img src={{ vich_uploader_asset(galaxy, 'imageFile') }}  alt="image galaxy"></img>
     <h1> {{ galaxy.name|upper }} </h1>

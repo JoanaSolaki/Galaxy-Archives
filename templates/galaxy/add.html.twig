@@ -2,7 +2,7 @@
 
 {% block title %}New Galaxy{% endblock %}
 
-{% block body %}
+{% block main %}
 {% if app.user == null %}
     <script>
         window.location.href = "{{ path('app_login') }}";
