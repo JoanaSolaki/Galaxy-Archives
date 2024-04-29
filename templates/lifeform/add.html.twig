@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Lifeform{% endblock %}
+
+{% block body %}
+
+{% if app.user == null %}
+    <script>
+        window.location.href = "{{ path('app_login') }}";
+    </script>
+{% endif %}
+
+    <h1>Create new Lifeform</h1>
+
+    {{ include('lifeform/_form.html.twig') }}
+
+{% endblock %}

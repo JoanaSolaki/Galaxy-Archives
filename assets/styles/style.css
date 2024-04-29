@@ -242,6 +242,68 @@ h2 {
 
 /* LIFEFORM */
 
+/* FORM */
+
+form {
+    max-width: 600px;
+    margin: 80px auto;
+    text-transform: capitalize;
+}
+
+.form-label, .col-form-label {
+    font-family: "Bruno Ace", sans-serif;
+}
+
+.form-control, .form-select, .form-control:focus, .form-control::placeholder {
+    background-color: var(--primaryColor);
+    color: var(--white);
+    border: none;
+    height: 40px;
+    margin-bottom: 20px;
+    box-shadow: rgba(2, 1, 6, 0.6) 3px 3px 6px 0px inset, rgba(2, 1, 6, 0.6) -3px -3px 6px 1px inset;
+}
+
+.vich-file .form-control {
+    height: auto;
+}
+
+textarea.form-control, textarea.form-control:focus  {
+    height: 200px;
+}
+
+#planet_lifeforms {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.form-check {
+    width: 20%;
+    margin: 0 20px;
+}
+
+.form-check-input {
+    background-color: var(--primaryColor);
+    border: none;
+}
+
+.form-check-input:checked {
+    background-color: var(--tertiaryColor);
+    border-color: var(--tertiaryColor);
+}
+
+.btn-primary {
+    background-color: #0D081D00;
+    border: 1px solid var(--white);
+    color: var(--white);
+    float: right;
+}
+
+.btn-primary:hover {
+    background-color: var(--primaryColor);
+    color: var(--white);
+    border: 1px solid var(--white);
+}
+
 /* FOOTER */
 
 footer {

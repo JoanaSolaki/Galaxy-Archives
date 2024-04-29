@@ -244,7 +244,7 @@ class Planet
 
     public function setImageName(?string $imageName): void
     {
-        $this->imageName = $imageName;
+        $this->imageName;
     }
 
     public function getImageName(): ?string

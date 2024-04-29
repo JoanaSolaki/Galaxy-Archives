@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %} {{ galaxy.name }} {% endblock %}
+
 {% block body %}
 <section class="galaxyHead">
     <img src={{ vich_uploader_asset(galaxy, 'imageFile') }}  alt="image galaxy"></img>

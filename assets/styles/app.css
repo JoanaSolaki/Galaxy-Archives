@@ -15,3 +15,7 @@ a, abbr {
     text-decoration: none;
     display: block;
 }
+
+img {
+    -webkit-user-drag: none;
+}

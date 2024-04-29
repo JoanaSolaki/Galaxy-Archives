@@ -14,7 +14,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
@@ -43,7 +42,7 @@ class LifeformCrudController extends AbstractCrudController implements EventSubs
                 "Friendly" => "Friendly"
             ])
             ->renderAsBadges(),
-            TextEditorField::new('description'),
+            TextareaField::new('description'),
             DateField::new('created_at')
             ->hideOnForm(),
             DateField::new('updated_at')

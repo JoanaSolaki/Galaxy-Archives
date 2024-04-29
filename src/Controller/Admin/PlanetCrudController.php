@@ -45,7 +45,7 @@ class PlanetCrudController extends AbstractCrudController implements EventSubscr
                 "Neutral" => "Neutral",
                 "Livable" => "Livable"
             ]),
-            TextEditorField::new('description'),
+            TextareaField::new('description'),
             DateField::new('created_at')
             ->hideOnForm(),
             DateField::new('updated_at')
