@@ -10,7 +10,7 @@
     background-blend-mode: color-dodge;
     height: 400px;
     padding: 20px 10px;
-    margin: 0 20px;
+    margin: 0 10px;
     box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
     color: var(--white);
 }
@@ -45,6 +45,10 @@
     }
 }
 
+.carousel {
+    margin: 0 5%;
+}
+
 .carousel-inner {
     margin: 0 auto;
 }
@@ -55,7 +59,6 @@
     display: flex;
 }
 
-/* medium and up screens */
 @media (min-width: 768px) {
     
     .carousel-inner .carousel-item-end.active,
@@ -75,8 +78,10 @@
 }
 
 .carousel-control-prev {
-    left: -10%;
+    left: -5%;
+    width: 40px
 }
 .carousel-control-next {
-    right: -10%;
+    right: -5%;
+    width: 40px
 }
