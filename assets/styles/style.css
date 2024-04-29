@@ -130,6 +130,8 @@ h2 {
 
 .galaxyCard img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
  
 .galaxyInfo {

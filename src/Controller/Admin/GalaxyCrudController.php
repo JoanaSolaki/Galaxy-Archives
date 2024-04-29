@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
@@ -44,6 +45,9 @@ class GalaxyCrudController extends AbstractCrudController implements EventSubscr
                 ->setBasePath('/uploads/images/galaxy')
                 ->setUploadDir('/public')
                 ->onlyOnIndex(),
+            AssociationField::new('author')
+            ->setCrudController(UserCrudController::class)
+            ->onlyOnIndex(),
         ];
     }
 
