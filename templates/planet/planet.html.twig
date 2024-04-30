@@ -12,7 +12,9 @@
         {% for planet in planets %}
             <div class="galery">
                 <img src={{ vich_uploader_asset(planet, 'imageFile') }}  alt="image {{ planet.name }}" class="galeryImg"></img>
-                <a href="{{ path('planet.show', {id: planet.id }) }}" class="galeryLink brunoAce">See {{ planet.name|capitalize }}</a>
+                <div class="galeryLink">
+                    <a href="{{ path('planet.show', {id: planet.id }) }}" class=" brunoAce">See {{ planet.name|capitalize }}</a>
+                </div>
             </div>
         {% endfor %}
     </article>

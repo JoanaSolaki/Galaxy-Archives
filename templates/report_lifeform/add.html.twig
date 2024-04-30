@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ReportLifeform{% endblock %}
+
+{% block body %}
+    <h1>Create new ReportLifeform</h1>
+
+    {{ include('report_lifeform/_form.html.twig') }}
+
+    <a href="{{ path('app_report_lifeform_index') }}">back to list</a>
+{% endblock %}

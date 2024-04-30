@@ -25,7 +25,8 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Galaxy Archives');
+            ->setTitle('Galaxy Archives')
+            ->setFaviconPath('img/stars.svg');
     }
 
     public function configureMenuItems(): iterable
@@ -36,7 +37,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('All users', 'fa-solid fa-user', User::class);
         yield MenuItem::linkToCrud('Add user', 'fa-solid fa-user', User::class)
             ->setAction('new');
-
         yield MenuItem::section('Galaxy');
         yield MenuItem::linkToCrud('All galaxies', 'fa-regular fa-star', Galaxy::class);
         yield MenuItem::linkToCrud('Add galaxy', 'fa-regular fa-star', Galaxy::class)

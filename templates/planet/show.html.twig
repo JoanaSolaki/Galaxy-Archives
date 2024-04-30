@@ -33,12 +33,19 @@
         <h2>Lifeforms :</h2>
         {% for lifeform in planet.lifeforms %}
             <div class="planetLifeform d-flex">
-                <div>
+                <div class="planetLifeformInfo">
                     <p class="brunoAce">{{ lifeform.name|capitalize }} :</p>
                     <p> {{ lifeform.description }} </p>
                 </div>
-                <a href="{{ path('lifeform.show', {id: lifeform.id}) }}"><img src={{ vich_uploader_asset(lifeform, 'imageFile') }}  alt="image {{ lifeform.name }}"></img></a>
+                <div class="galery">
+                    <img src={{ vich_uploader_asset(lifeform, 'imageFile') }}  alt="image {{ lifeform.name }}" class="galeryImg"></img>
+                    <div class="galeryLink">
+                        <a href="{{ path('lifeform.show', {id: lifeform.id }) }}" class="brunoAce">See {{ lifeform.name|capitalize }}</a>
+                    </div>
+                </div>
             </div>
+
+
         {% endfor %}
 
         <a href="{{ path('lifeform.create') }}" class="btn btn_outline btn_center">report a lifeform</a>

@@ -220,30 +220,19 @@ h2 {
     justify-content: space-between;
 }
 
-.planetLifeform div {
+.planetLifeformInfo {
     width: 60%;
 }
 
-.planetLifeform a {
-    display: contents;
-    overflow: hidden;
-}
-
-.planetLifeform img {
+.planetLifeform .galery {
     width: 36%;
-    height: 100%;
-    transition: 300ms;
-}
-
-.planetLifeform img:hover {
-    filter: brightness(40%);
-    transform: scale(1.1);
 }
 
 /* GALERY */
 .galery {
     width: 30%;
     height: auto;
+    overflow: hidden;
     position: relative;
     margin: 10px;
 }
@@ -252,23 +241,31 @@ h2 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: 300ms ease-in-out;
+    transition: 400ms ease-in-out;
 }
 
 .galeryLink {
     position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: 400ms ease-in-out;
+}
+
+.galeryLink a {
+    position: absolute;
     top: 50%;
     left: 50%;
-    color: var(--white);
-    text-decoration: none;
     transform: translate(-50%, -50%);
-    opacity: 0;
+    object-fit: contain;
     text-align: center;
-    transition: 300ms ease-in-out;
 }
 
 .galery:hover .galeryImg {
     filter: brightness(20%);
+    transform: scale(1.4, 1.4);
 }
 
 .galery:hover .galeryLink {
