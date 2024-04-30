@@ -1,50 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Lifeform{% endblock %}
+{% block title %} {{ lifeform.name }} {% endblock %}
 
-{% block body %}
-    <h1>Lifeform</h1>
+{% block main %}
+<section class="lifeformHead wrapper d-flex">
+    <div class="lifeformHeadInfo">
+        <h1> {{ lifeform.name|upper }} </h1>
+        <p><span class="brunoAce">Name :</span> {{ lifeform.name }}</p>
+        <p><span class="brunoAce">Species :</span> {{ lifeform.species }}</p>
+        <p><span class="brunoAce">Behavior :</span> {{ lifeform.behavior }}</p>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ lifeform.id }}</td>
-            </tr>
-            <tr>
-                <th>ImageName</th>
-                <td>{{ lifeform.imageName }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ lifeform.name }}</td>
-            </tr>
-            <tr>
-                <th>Species</th>
-                <td>{{ lifeform.species }}</td>
-            </tr>
-            <tr>
-                <th>Behavior</th>
-                <td>{{ lifeform.behavior }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ lifeform.description }}</td>
-            </tr>
-            <tr>
-                <th>Created_at</th>
-                <td>{{ lifeform.createdAt ? lifeform.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Updated_at</th>
-                <td>{{ lifeform.updatedAt ? lifeform.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <p>created by 
+            <a href="" class="d-inline">{{ lifeform.author.username }}</a>, 
+            the {{ lifeform.createdAt|date('d-m-Y') }}
+            {% if lifeform.updatedAt != null %}
+            , updated the  {{ lifeform.updatedAt|date('d-m-Y') }}  at  {{ lifeform.updatedAt|date('H:i') }}
+            {% endif %}
+        </p>
 
-    <a href="{{ path('app_lifeform_index') }}">back to list</a>
+    </div>
+    <img src={{ vich_uploader_asset(lifeform, 'imageFile') }}  alt="image lifeform"></img>
+</section>
 
-    <a href="{{ path('app_lifeform_edit', {'id': lifeform.id}) }}">edit</a>
+<section class="lifeformBody wrapper">
+    <article>
+        <h2>Description :</h2>
+        <p> {{ lifeform.description }} </p>
 
-    {{ include('lifeform/_delete_form.html.twig') }}
+        <a href="{ path('planet.edit', {id: lifeform.id}) }}" class="btn btn_outline btn_center">edit this lifeform</a>
+    </article>
+</section>
+
+
+<section class="reports">
+    {% for report in lifeform.reportlifeforms %}
+        <article class="report">
+            <h3>Report form
+                <a href="" class="d-inline">{{ report.author.username }}</a>, 
+                the {{ report.createdAt|date('d-m-Y') }} at {{ report.createdAt|date('H:i') }}
+                {% if report.updatedAt != null %}
+                , updated the  {{ report.updatedAt|date('d-m-Y') }}  at  {{ report.updatedAt|date('H:i') }}
+                {% endif %}
+            </h3>
+            <p> {{ report.body }} </p>
+        </article>
+    {% endfor %}
+    <a href="" class="btn btn_outline btn_center">create a report</a>
+</section>
 {% endblock %}

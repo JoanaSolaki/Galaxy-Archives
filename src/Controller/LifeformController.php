@@ -16,18 +16,8 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('lifeform')]
 class LifeformController extends AbstractController
 {
-    #[Route('/{id}', name: 'lifeform.show')]
-    public function index(int $id, LifeformRepository $lifeformRepository): Response
-    {
-        $lifeform = $lifeformRepository->find($id);
-        return $this->render('lifeform/lifeform.html.twig', [
-            "id" => $id,
-            'lifeform' => $lifeform,
-        ]);
-    }
-
     #[Route('/create', name: 'lifeform.create', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, Security $security): Response
+    public function add(Request $request, EntityManagerInterface $entityManager, Security $security): Response
     {
         $lifeform = new Lifeform();
         $form = $this->createForm(LifeformType::class, $lifeform);
@@ -52,6 +42,25 @@ class LifeformController extends AbstractController
         ]);
     }
 
+    #[Route('/', name: 'lifeform')]
+    public function index(LifeformRepository $lifeformRepository): Response
+    {
+        $lifeforms = $lifeformRepository->findAll();
+        return $this->render('lifeform/lifeform.html.twig', [
+            'lifeforms' => $lifeforms,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'lifeform.show')]
+    public function show(int $id, LifeformRepository $lifeformRepository): Response
+    {
+        $lifeform = $lifeformRepository->find($id);
+        return $this->render('lifeform/lifeform.html.twig', [
+            "id" => $id,
+            'lifeform' => $lifeform,
+        ]);
+    }
+
     #[Route('/{id}/edit', name: 'lifeform.edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Lifeform $lifeform, EntityManagerInterface $entityManager): Response
     {
@@ -60,8 +69,12 @@ class LifeformController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+            
+            $lifeformId = $lifeform->getId();
 
-            return $this->redirectToRoute('app_lifeform_index');
+            $this->addFlash('success', 'Your lifeform have been updated.');
+
+            return $this->redirectToRoute('lifeform.show', ['id' => $lifeformId]);
         }
 
         return $this->render('lifeform/edit.html.twig', [

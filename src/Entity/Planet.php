@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Entity\File as EmbeddedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PlanetRepository::class)]
 #[Vich\Uploadable]
@@ -26,6 +27,12 @@ class Planet
     #[ORM\ManyToOne(inversedBy: 'planets')]
     private ?User $author = null;
 
+    #[Assert\File(
+        maxSize: '2M',
+        extensions: ['jpg', 'jpeg', "png"],
+        extensionsMessage: 'Please upload a valid image',
+        maxSizeMessage: 'The file is too large. Allowed maximum size is 2Mo.',
+    )]
     #[Vich\UploadableField(mapping: 'planets', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;
 
@@ -244,7 +251,7 @@ class Planet
 
     public function setImageName(?string $imageName): void
     {
-        $this->imageName;
+        $this->imageName = $imageName;
     }
 
     public function getImageName(): ?string

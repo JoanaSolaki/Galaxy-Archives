@@ -1,62 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} {{ planet.name }} {% endblock %}
-
+{% block title %} All planets {% endblock %}
 
 {% block main %}
-<section class="planetHead wrapper d-flex">
-    <div class="planetHeadInfo">
-        <h1> {{ planet.name|upper }} </h1>
-        <p><span class="brunoAce">Galaxy :</span> {{ planet.galaxy }}</p>
-        <p><span class="brunoAce">Type :</span> {{ planet.type }}</p>
-        <p><span class="brunoAce">Condition :</span> {{ planet.lifeCondition }}</p>
 
-        <p>created by 
-            <a href="" class="d-inline">{{ planet.author.username }}</a>, 
-            the {{ planet.createdAt|date('d-m-Y') }}
-            {% if planet.updatedAt != null %}
-            , updated the  {{ planet.updatedAt|date('d-m-Y') }}  at  {{ planet.updatedAt|date('H:i') }}
-            {% endif %}
-        </p>
+<section class="wrapper">
+    <h1>Planets</h1>
 
-    </div>
-
-    <img src={{ vich_uploader_asset(planet, 'imageFile') }}  alt="image planet"></img>
-</section>
-
-<section class="planetBody wrapper">
-    <article>
-        <h2>Description :</h2>
-        <p> {{ planet.description }} </p>
-
-        <h2>Lifeforms :</h2>
-        {% for lifeform in planet.lifeforms %}
-            <div class="planetLifeform d-flex">
-                <div>
-                    <p class="brunoAce">{{ lifeform.name|capitalize }} :</p>
-                    <p> {{ lifeform.description }} </p>
-                </div>
-                <a href="{{ path('lifeform.show', {id: lifeform.id}) }}"><img src={{ vich_uploader_asset(lifeform, 'imageFile') }}  alt="image {{ lifeform.name }}"></img></a>
+    <a href="" class="btn btn_outline mt-4 mb-4">filter by</a>
+    <article class="d-flex flex-wrap">
+        {% for planet in planets %}
+            <div class="galery">
+                <img src={{ vich_uploader_asset(planet, 'imageFile') }}  alt="image {{ planet.name }}" class="galeryImg"></img>
+                <a href="{{ path('planet.show', {id: planet.id }) }}" class="galeryLink brunoAce">See {{ planet.name|capitalize }}</a>
             </div>
         {% endfor %}
-
-        <a href="{{ path('lifeform.create') }}" class="btn btn_outline btn_center">report a lifeform</a>
     </article>
 </section>
 
-<section class="reports">
-    {% for report in planet.reportPlanets %}
-        <article class="report">
-            <h3>Report form
-                <a href="" class="d-inline">{{ report.author.username }}</a>, 
-                the {{ report.createdAt|date('d-m-Y') }} at {{ report.createdAt|date('H:i') }}
-                {% if report.updatedAt != null %}
-                , updated the  {{ report.updatedAt|date('d-m-Y') }}  at  {{ report.updatedAt|date('H:i') }}
-                {% endif %}
-            </h3>
-            <p> {{ report.body }} </p>
-        </article>
-    {% endfor %}
-    <a href="" class="btn btn_outline btn_center">create a report</a>
-</section>
 {% endblock %}

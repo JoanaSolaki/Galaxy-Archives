@@ -1,46 +1,67 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Galaxy{% endblock %}
+{% block title %} {{ galaxy.name }} {% endblock %}
 
-{% block body %}
-    <h1>Galaxy</h1>
+{% block main %}
+<section class="galaxyHead">
+    <img src={{ vich_uploader_asset(galaxy, 'imageFile') }}  alt="image galaxy"></img>
+    <h1> {{ galaxy.name|upper }} </h1>
+</section>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ galaxy.id }}</td>
-            </tr>
-            <tr>
-                <th>ImageName</th>
-                <td>{{ galaxy.imageName }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ galaxy.name }}</td>
-            </tr>
-            <tr>
-                <th>Particularities</th>
-                <td>{{ galaxy.particularities }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ galaxy.description }}</td>
-            </tr>
-            <tr>
-                <th>Created_at</th>
-                <td>{{ galaxy.createdAt ? galaxy.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Updated_at</th>
-                <td>{{ galaxy.updatedAt ? galaxy.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+<section class="galaxyBody wrapper">
+    <article>
+        <h2>Particularities :</h2>
+        <p> {{ galaxy.particularities }} </p>
+        
+        <h2>Description :</h2>
+        <p> {{ galaxy.description }} </p>
+    </article>
 
-    <a href="{{ path('app_galaxy_index') }}">back to list</a>
+    <article>
+        <h2>Planets :</h2>
 
-    <a href="{{ path('app_galaxy_edit', {'id': galaxy.id}) }}">edit</a>
+        <div class="justify-content-center align-item-center wrapper">
+            <div id="recipeCarousel" class="carousel slide" data-interval="false">
+                <div class="carousel-inner">
+                {% for planet in galaxy.planets %}
+                    <div class="carousel-item  {{ loop.index == 3 ? 'active' : '' }}">
+                        <div class="card planetCard">
+                            <div class="card-img planetImg">
+                                <img src={{ vich_uploader_asset(planet, 'imageFile') }} class="d-block w-100" alt="image planet"></img>
+                            </div>
+                            <div class="planetInfo">
+                                <h3>{{ planet.name|upper }}</h3>
+                                <ul>
+                                    <li><span class="brunoAce">Galaxy :</span> {{ planet.galaxy }} </li>
+                                    <li><span class="brunoAce">Category :</span> {{ planet.type }} </li>
+                                    <li><span class="brunoAce">Condition :</span> {{ planet.lifeCondition }} </li>
+                                    <li><span class="brunoAce">Life :</span>
+                                        {% if planet.lifeforms is not empty %} 
+                                            {% for lifeform in planet.lifeforms %} 
+                                                {{ lifeform.name|capitalize }}
+                                            {% endfor %}
+                                        {% else %}
+                                            None
+                                        {% endif %}
+                                    </li>
+                                </ul>
+                                <a href="{{ path('planet.show', {id: planet.id}) }}" class="btn btn_outline">See planet</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
 
-    {{ include('galaxy/_delete_form.html.twig') }}
+                </div>
+                <a class="carousel-control-prev bg-transparent w-aut" href="#recipeCarousel" role="button" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </a>
+                <a class="carousel-control-next bg-transparent w-aut" href="#recipeCarousel" role="button" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </a>
+            </div>
+        </div>
+
+        <a href="" class="btn btn_outline btn_center">report a planet</a>
+    </article>
+</section>
 {% endblock %}

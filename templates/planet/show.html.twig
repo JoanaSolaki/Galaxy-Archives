@@ -1,50 +1,63 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Planet{% endblock %}
+{% block title %} {{ planet.name }} {% endblock %}
 
-{% block body %}
-    <h1>Planet</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ planet.id }}</td>
-            </tr>
-            <tr>
-                <th>ImageName</th>
-                <td>{{ planet.imageName }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ planet.name }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ planet.type }}</td>
-            </tr>
-            <tr>
-                <th>LifeCondition</th>
-                <td>{{ planet.lifeCondition }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ planet.description }}</td>
-            </tr>
-            <tr>
-                <th>Created_at</th>
-                <td>{{ planet.createdAt ? planet.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Updated_at</th>
-                <td>{{ planet.updatedAt ? planet.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+{% block main %}
+<section class="planetHead wrapper d-flex">
+    <div class="planetHeadInfo">
+        <h1> {{ planet.name|upper }} </h1>
+        <p><span class="brunoAce">Galaxy :</span> {{ planet.galaxy }}</p>
+        <p><span class="brunoAce">Type :</span> {{ planet.type }}</p>
+        <p><span class="brunoAce">Condition :</span> {{ planet.lifeCondition }}</p>
 
-    <a href="{{ path('app_planet_index') }}">back to list</a>
+        <p>created by 
+            <a href="" class="d-inline">{{ planet.author.username }}</a>, 
+            the {{ planet.createdAt|date('d-m-Y') }}
+            {% if planet.updatedAt != null %}
+            , updated the  {{ planet.updatedAt|date('d-m-Y') }}  at  {{ planet.updatedAt|date('H:i') }}
+            {% endif %}
+        </p>
 
-    <a href="{{ path('app_planet_edit', {'id': planet.id}) }}">edit</a>
+    </div>
 
-    {{ include('planet/_delete_form.html.twig') }}
+    <img src={{ vich_uploader_asset(planet, 'imageFile') }}  alt="image planet"></img>
+</section>
+<section class="planetBody wrapper">
+    <article>
+        <h2>Description :</h2>
+        <p> {{ planet.description }} </p>
+
+        <a href="{{ path('planet.edit', {id: planet.id}) }}" class="btn btn_outline btn_center">edit this planet</a>
+
+        <h2>Lifeforms :</h2>
+        {% for lifeform in planet.lifeforms %}
+            <div class="planetLifeform d-flex">
+                <div>
+                    <p class="brunoAce">{{ lifeform.name|capitalize }} :</p>
+                    <p> {{ lifeform.description }} </p>
+                </div>
+                <a href="{{ path('lifeform.show', {id: lifeform.id}) }}"><img src={{ vich_uploader_asset(lifeform, 'imageFile') }}  alt="image {{ lifeform.name }}"></img></a>
+            </div>
+        {% endfor %}
+
+        <a href="{{ path('lifeform.create') }}" class="btn btn_outline btn_center">report a lifeform</a>
+    </article>
+</section>
+
+<section class="reports">
+    {% for report in planet.reportPlanets %}
+        <article class="report">
+            <h3>Report form
+                <a href="" class="d-inline">{{ report.author.username }}</a>, 
+                the {{ report.createdAt|date('d-m-Y') }} at {{ report.createdAt|date('H:i') }}
+                {% if report.updatedAt != null %}
+                , updated the  {{ report.updatedAt|date('d-m-Y') }}  at  {{ report.updatedAt|date('H:i') }}
+                {% endif %}
+            </h3>
+            <p> {{ report.body }} </p>
+        </article>
+    {% endfor %}
+    <a href="" class="btn btn_outline btn_center">create a report</a>
+</section>
 {% endblock %}

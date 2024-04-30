@@ -26,18 +26,27 @@ class GalaxyController extends AbstractController
         ]);
     }
 
+    #[Route('/galaxy', name: 'galaxy')]
+    public function index(GalaxyRepository $galaxyRepository): Response
+    {
+        $galaxies = $galaxyRepository->findAll();
+        return $this->render('galaxy/galaxy.html.twig', [
+            'galaxies' => $galaxies,
+        ]);
+    }
+
     #[Route('/galaxy/{id}', name: 'galaxy.show')]
-    public function index(int $id, GalaxyRepository $galaxyRepository): Response
+    public function show(int $id, GalaxyRepository $galaxyRepository): Response
     {
         $galaxy = $galaxyRepository->find($id);
-        return $this->render('galaxy/galaxy.html.twig', [
+        return $this->render('galaxy/show.html.twig', [
             'id' => $id,
             'galaxy' => $galaxy,
         ]);
     }
 
     #[Route('/galaxy/create', name: 'galaxy.create', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function add(Request $request, EntityManagerInterface $entityManager): Response
     {
         $galaxy = new Galaxy();
         $form = $this->createForm(GalaxyType::class, $galaxy);

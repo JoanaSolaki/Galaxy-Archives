@@ -1,13 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Planet{% endblock %}
+{% block title %}Edit {{ planet.name }}{% endblock %}
 
-{% block body %}
-    <h1>Edit Planet</h1>
+{% block main %}
 
-    {{ include('planet/_form.html.twig', {'button_label': 'Update'}) }}
+{% if app.user == null %}
+    <script>
+        window.location.href = "{{ path('app_login') }}";
+    </script>
+{% endif %}
 
-    <a href="{{ path('app_planet_index') }}">back to list</a>
+<section class="wrapper">
+    <h1>Edit {{ planet.name }}</h1>
 
-    {{ include('planet/_delete_form.html.twig') }}
+    {{ include('planet/_form.html.twig') }}
+
+    {# {{ include('planet/_delete_form.html.twig') }} #}
+</section>
+
 {% endblock %}

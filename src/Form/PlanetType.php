@@ -53,7 +53,6 @@ class PlanetType extends AbstractType
                 'class' => Galaxy::class,
                 'choice_label' => 'name',
             ])
-
             ->add('lifeforms', EntityType::class, [
                 'class' => Lifeform::class,
                 'choice_label' => 'name',
@@ -68,19 +67,6 @@ class PlanetType extends AbstractType
                 // 'image_uri' => true,
                 // 'imagine_pattern' => '...',
                 'asset_helper' => true,
-                'constraints' => [
-                    new File([
-                        'maxSize' => '2M',
-                        'maxSizeMessage' => 'The file is too large. Allowed maximum size is 2Mo.',
-                        'mimeTypes' => [
-                            'image/jpg',
-                            'image/jpeg',
-                            'image/png',
-                        ],
-                        'mimeTypesMessage' => 'Please upload a valid image (JPG, JPEG, PNG)',
-
-                    ])
-                ],
             ])
             ->add('submit', SubmitType::class)
         ;

@@ -42,11 +42,20 @@ class PlanetController extends AbstractController
         ]);
     }
 
+    #[Route('/', name: 'planet')]
+    public function index(PlanetRepository $planetRepository): Response
+    {
+        $planets = $planetRepository->findAll();
+        return $this->render('planet/planet.html.twig', [
+            'planets' => $planets,
+        ]);
+    }
+
     #[Route('/{id}', name: 'planet.show')]
     public function show(int $id, PlanetRepository $planetRepository): Response
     {
         $planet = $planetRepository->find($id);
-        return $this->render('planet/planet.html.twig', [
+        return $this->render('planet/show.html.twig', [
             'id' => $id,
             'planet' => $planet,
         ]);
@@ -61,9 +70,12 @@ class PlanetController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_planet_index');
-        }
+            $planetId = $planet->getId();
 
+            $this->addFlash('success', 'Your planet have been updated.');
+
+            return $this->redirectToRoute('planet.show', ['id' => $planetId]);
+        }
         return $this->render('planet/edit.html.twig', [
             'planet' => $planet,
             'form' => $form,
