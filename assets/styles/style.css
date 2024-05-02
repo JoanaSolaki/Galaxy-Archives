@@ -16,6 +16,7 @@ body {
 .wrapper {
     max-width: 1000px;
     margin: 0 auto;
+    padding: 20px;
 }
 
 .container-fluid {
@@ -229,6 +230,7 @@ h2 {
 }
 
 /* GALERY */
+
 .galery {
     width: 30%;
     height: auto;
@@ -270,6 +272,32 @@ h2 {
 
 .galery:hover .galeryLink {
     opacity: 1;
+}
+
+/* REPORTS */
+
+.report {
+    width: 100%;
+    border: 1px solid var(--white);
+    background-color: #9747FF60;
+    padding: 20px 30px;
+    line-height: 2;
+    margin: 20px 0;
+}
+
+.report h3 {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.formDelete {
+    width: fit-content;
+    margin: 10px 0 0 0;
+}
+
+.formDeleteCenter {
+    width: fit-content;
+    margin:  0 auto;
 }
 
 /* FORM */

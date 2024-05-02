@@ -14,8 +14,8 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/lifeform/report')]
 class ReportLifeformController extends AbstractController
 {
-    #[Route('/add', name: 'lifeform.report.add', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/add', name: 'lifeform.report.add', methods: ['GET', 'POST'])]
+    public function add(int $id, Request $request, EntityManagerInterface $entityManager): Response
     {
         $reportLifeform = new ReportLifeform();
         $form = $this->createForm(ReportLifeformType::class, $reportLifeform);

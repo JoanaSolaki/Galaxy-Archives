@@ -1,11 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New ReportLifeform{% endblock %}
+{% block title %}Create report{% endblock %}
 
-{% block body %}
-    <h1>Create new ReportLifeform</h1>
+{% block main %}
+
+{% if app.user == null %}
+    <script>
+        window.location.href = "{{ path('app_login') }}";
+    </script>
+{% endif %}
+
+    <h1>Create report</h1>
 
     {{ include('report_lifeform/_form.html.twig') }}
-
-    <a href="{{ path('app_report_lifeform_index') }}">back to list</a>
 {% endblock %}

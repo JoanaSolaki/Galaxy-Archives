@@ -68,6 +68,8 @@ class PlanetController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $planet->setUpdatedAt(new DateTime());
+
             $entityManager->flush();
 
             $planetId = $planet->getId();
@@ -86,6 +88,12 @@ class PlanetController extends AbstractController
     public function delete(Request $request, Planet $planet, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$planet->getId(), $request->getPayload()->get('_token'))) {
+            $reports = $planet->getReportPlanets();
+
+            foreach ($reports as $report) {
+                $entityManager->remove($report);
+            }
+
             $entityManager->remove($planet);
             $entityManager->flush();
             $this->addFlash('warning', 'The planet have been removed.');

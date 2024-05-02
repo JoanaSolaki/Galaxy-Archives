@@ -12,6 +12,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -24,6 +25,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\File(
+        maxSize: '2M',
+        extensions: ['jpg', 'jpeg', "png"],
+        extensionsMessage: 'Please upload a valid image',
+        maxSizeMessage: 'The file is too large. Allowed maximum size is 2Mo.',
+    )]
     #[Vich\UploadableField(mapping: 'avatar', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;
 

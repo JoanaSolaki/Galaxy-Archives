@@ -47,6 +47,8 @@ class LifeformFixtures extends AbstractFixtures implements DependentFixtureInter
             $lifeform->setAuthor($this->getReference('user_' . $this->faker->randomNumber(1, 9)));
             $lifeform->addPlanet($this->getReference('planet_' . $this->faker->randomNumber(1, 9)));
 
+            $this->setReference('lifeform_' . $i, $lifeform);
+
             $objectManager->persist($lifeform);
         }
 

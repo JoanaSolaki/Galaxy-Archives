@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: GalaxyRepository::class)]
 #[Vich\Uploadable]
@@ -19,6 +20,12 @@ class Galaxy
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\File(
+        maxSize: '2M',
+        extensions: ['jpg', 'jpeg', "png"],
+        extensionsMessage: 'Please upload a valid image',
+        maxSizeMessage: 'The file is too large. Allowed maximum size is 2Mo.',
+    )]
     #[Vich\UploadableField(mapping: 'galaxy', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;
 

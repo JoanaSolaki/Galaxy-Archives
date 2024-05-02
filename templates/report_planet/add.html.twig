@@ -1,11 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New ReportPlanet{% endblock %}
+{% block title %}Create report{% endblock %}
 
-{% block body %}
-    <h1>Create new ReportPlanet</h1>
+{% block main %}
+
+{% if app.user == null %}
+    <script>
+        window.location.href = "{{ path('app_login') }}";
+    </script>
+{% endif %}
+
+    <h1>Create report</h1>
 
     {{ include('report_planet/_form.html.twig') }}
-
-    <a href="{{ path('app_report_planet_index') }}">back to list</a>
 {% endblock %}

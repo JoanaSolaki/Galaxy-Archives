@@ -45,53 +45,53 @@ class GalaxyController extends AbstractController
         ]);
     }
 
-    #[Route('/galaxy/create', name: 'galaxy.create', methods: ['GET', 'POST'])]
-    public function add(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $galaxy = new Galaxy();
-        $form = $this->createForm(GalaxyType::class, $galaxy);
-        $form->handleRequest($request);
+    // #[Route('/galaxy/create', name: 'galaxy.create', methods: ['GET', 'POST'])]
+    // public function add(Request $request, EntityManagerInterface $entityManager): Response
+    // {
+    //     $galaxy = new Galaxy();
+    //     $form = $this->createForm(GalaxyType::class, $galaxy);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($galaxy);
-            $entityManager->flush();
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $entityManager->persist($galaxy);
+    //         $entityManager->flush();
 
-            return $this->redirectToRoute('app_galaxy_index');
-        }
+    //         return $this->redirectToRoute('app_galaxy_index');
+    //     }
 
-        return $this->render('galaxy/add.html.twig', [
-            'galaxy' => $galaxy,
-            'form' => $form,
-        ]);
-    }
+    //     return $this->render('galaxy/add.html.twig', [
+    //         'galaxy' => $galaxy,
+    //         'form' => $form,
+    //     ]);
+    // }
 
-    #[Route('/galaxy/{id}/edit', name: 'galaxy.edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Galaxy $galaxy, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(GalaxyType::class, $galaxy);
-        $form->handleRequest($request);
+    // #[Route('/galaxy/{id}/edit', name: 'galaxy.edit', methods: ['GET', 'POST'])]
+    // public function edit(Request $request, Galaxy $galaxy, EntityManagerInterface $entityManager): Response
+    // {
+    //     $form = $this->createForm(GalaxyType::class, $galaxy);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $entityManager->flush();
 
-            return $this->redirectToRoute('app_galaxy_index');
-        }
+    //         return $this->redirectToRoute('app_galaxy_index');
+    //     }
 
-        return $this->render('galaxy/edit.html.twig', [
-            'galaxy' => $galaxy,
-            'form' => $form,
-        ]);
-    }
+    //     return $this->render('galaxy/edit.html.twig', [
+    //         'galaxy' => $galaxy,
+    //         'form' => $form,
+    //     ]);
+    // }
 
-    #[Route('/galaxy/{id}/delete', name: 'galaxy.delete', methods: ['POST'])]
-    public function delete(Request $request, Galaxy $galaxy, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$galaxy->getId(), $request->getPayload()->get('_token'))) {
-            $entityManager->remove($galaxy);
-            $entityManager->flush();
-            $this->addFlash('warning', 'Galaxy and this components have been removed.');
-        }
+    // #[Route('/galaxy/{id}/delete', name: 'galaxy.delete', methods: ['POST'])]
+    // public function delete(Request $request, Galaxy $galaxy, EntityManagerInterface $entityManager): Response
+    // {
+    //     if ($this->isCsrfTokenValid('delete'.$galaxy->getId(), $request->getPayload()->get('_token'))) {
+    //         $entityManager->remove($galaxy);
+    //         $entityManager->flush();
+    //         $this->addFlash('warning', 'Galaxy and this components have been removed.');
+    //     }
 
-        return $this->redirectToRoute('homepage');
-    }
+    //     return $this->redirectToRoute('homepage');
+    // }
 }

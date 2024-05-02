@@ -2,11 +2,10 @@
 
 namespace App\Form;
 
-use App\Entity\Planet;
 use App\Entity\ReportPlanet;
-use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,21 +14,12 @@ class ReportPlanetType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('body')
-            ->add('created_at', null, [
-                'widget' => 'single_text',
+            ->add('body', TextareaType::class, [
+                'attr' => array(
+                    'placeholder' => 'Enter your report.'
+                )
             ])
-            ->add('updated_at', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('planet', EntityType::class, [
-                'class' => Planet::class,
-                'choice_label' => 'id',
-            ])
-            ->add('author', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
-            ])
+            ->add('submit', SubmitType::class)
         ;
     }
 

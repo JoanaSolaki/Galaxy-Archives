@@ -1,13 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit ReportLifeform{% endblock %}
+{% block title %}Edit report{% endblock %}
 
-{% block body %}
-    <h1>Edit ReportLifeform</h1>
+{% block main %}
+
+{% if app.user == null %}
+    <script>
+        window.location.href = "{{ path('app_login') }}";
+    </script>
+{% endif %}
+
+    <h1>Edit report</h1>
 
     {{ include('report_lifeform/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_report_lifeform_index') }}">back to list</a>
-
-    {{ include('report_lifeform/_delete_form.html.twig') }}
 {% endblock %}

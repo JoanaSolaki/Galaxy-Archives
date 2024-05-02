@@ -27,15 +27,21 @@
         <h2>Description :</h2>
         <p> {{ lifeform.description }} </p>
 
-        <a href="{ path('planet.edit', {id: lifeform.id}) }}" class="btn btn_outline btn_center">edit this lifeform</a>
+        {% if app.user != null and app.user.id == lifeform.author.id %}
+            <a href="{ path('planet.edit', {id: lifeform.id}) }}" class="btn btn_outline btn_center">edit this lifeform</a>
+            <form class="formDeleteCenter" method="post" action="{{ path('lifeform.delete', {'id': lifeform.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ lifeform.id) }}">
+                <button class="btn btn_full">delete this lifeform</button>
+            </form>
+        {% endif %}
     </article>
 </section>
 
-
-<section class="reports">
+<section class="reports wrapper">
+    <h2>Reports :</h2>
     {% for report in lifeform.reportlifeforms %}
         <article class="report">
-            <h3>Report form
+            <h3>Report from
                 <a href="" class="d-inline">{{ report.author.username }}</a>, 
                 the {{ report.createdAt|date('d-m-Y') }} at {{ report.createdAt|date('H:i') }}
                 {% if report.updatedAt != null %}
@@ -43,8 +49,17 @@
                 {% endif %}
             </h3>
             <p> {{ report.body }} </p>
+
+            {% if app.user != null and app.user.id == report.author.id %}
+                <a href="{{ path('lifeform.report.edit', {id: report.id}) }}" class="btn btn_outline">edit this report</a>
+                <form class="formDelete" method="post" action="{{ path('lifeform.report.delete', {'id': report.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ report.id) }}">
+                    <button class="btn btn_full">delete this report</button>
+                </form>
+            {% endif %}
+
         </article>
     {% endfor %}
-    <a href="" class="btn btn_outline btn_center">create a report</a>
+    <a href="{{ path('lifeform.report.add', {id: lifeform.id}) }}" class="btn btn_outline btn_center">create a report</a>
 </section>
 {% endblock %}

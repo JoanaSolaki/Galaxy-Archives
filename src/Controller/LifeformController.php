@@ -55,7 +55,7 @@ class LifeformController extends AbstractController
     public function show(int $id, LifeformRepository $lifeformRepository): Response
     {
         $lifeform = $lifeformRepository->find($id);
-        return $this->render('lifeform/lifeform.html.twig', [
+        return $this->render('lifeform/show.html.twig', [
             "id" => $id,
             'lifeform' => $lifeform,
         ]);
@@ -68,6 +68,8 @@ class LifeformController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $lifeform->setUpdatedAt(new DateTime());
+
             $entityManager->flush();
             
             $lifeformId = $lifeform->getId();
@@ -87,6 +89,12 @@ class LifeformController extends AbstractController
     public function delete(Request $request, Lifeform $lifeform, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$lifeform->getId(), $request->getPayload()->get('_token'))) {
+            $reports = $lifeform->getReportLifeforms();
+
+            foreach ($reports as $report) {
+                $entityManager->remove($report);
+            }
+
             $entityManager->remove($lifeform);
             $entityManager->flush();
             $this->addFlash('warning', 'The lifeform have been removed.');
