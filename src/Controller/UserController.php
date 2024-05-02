@@ -29,23 +29,22 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'user.edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    public function edit(int $id, Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setUpdatedAt(new DateTime());
 
             $entityManager->flush();
 
-            $planetId = $user->getId();
+            $userId = $user->getId();
 
             $this->addFlash('success', 'Your profile have been updated.');
 
-            return $this->redirectToRoute('planet.show', ['id' => $planetId]);
+            return $this->redirectToRoute('user', ['id' => $userId]);
         }
-        return $this->render('planet/edit.html.twig', [
+        return $this->render('user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);

@@ -14,7 +14,7 @@
         <h1 class="mb-9"> {{ user.username|upper }} </h1>
         {% if app.user is not null and app.user.roles is not null %}
             {% if user.id == app.user.id or app.user.roles[0] == "ROLE_ADMIN" %}
-                <a href="{ path('user.edit', {id: user.id}) }}" class="btn btn_outline">edit profile</a>
+                <a href="{{ path('user.edit', {id: user.id}) }}" class="btn btn_outline">edit profile</a>
                 <form class="formDelete" method="post" action="{{ path('user.delete', {'id': user.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
                     <button class="btn btn_full">delete profile</button>

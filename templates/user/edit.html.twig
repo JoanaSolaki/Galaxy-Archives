@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit {{ planet.name }}{% endblock %}
+{% block title %}Edit {{ user.username }}{% endblock %}
 
 {% block main %}
 
@@ -11,9 +11,9 @@
 {% endif %}
 
 <section class="wrapper">
-    <h1>Edit {{ planet.name }}</h1>
+    <h1>Edit {{ user.username }}</h1>
 
-    {{ include('planet/_form.html.twig') }}
+    {{ include('user/_form.html.twig') }}
 </section>
 
 {% endblock %}
