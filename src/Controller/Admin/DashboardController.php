@@ -5,6 +5,8 @@ namespace App\Controller\Admin;
 use App\Entity\Galaxy;
 use App\Entity\Lifeform;
 use App\Entity\Planet;
+use App\Entity\ReportLifeform;
+use App\Entity\ReportPlanet;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -46,10 +48,16 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('All planets', 'fa-solid fa-meteor', Planet::class);
         yield MenuItem::linkToCrud('Add planet', 'fa-solid fa-meteor', Planet::class)
             ->setAction('new');
+        yield MenuItem::linkToCrud('All reports', 'fa-solid fa-meteor', ReportPlanet::class);
+        yield MenuItem::linkToCrud('Add report', 'fa-solid fa-meteor', ReportPlanet::class)
+            ->setAction('new');
 
         yield MenuItem::section('Lifeform');
         yield MenuItem::linkToCrud('All lifeforms', 'fa-solid fa-dragon', Lifeform::class);
         yield MenuItem::linkToCrud('Add lifeform', 'fa-solid fa-dragon', Lifeform::class)
+            ->setAction('new');
+        yield MenuItem::linkToCrud('All reports', 'fa-solid fa-dragon', ReportLifeform::class);
+        yield MenuItem::linkToCrud('Add report', 'fa-solid fa-dragon', ReportLifeform::class)
             ->setAction('new');
     }
 }
