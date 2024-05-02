@@ -11,7 +11,7 @@
         <p><span class="brunoAce">Behavior :</span> {{ lifeform.behavior }}</p>
 
         <p>created by 
-            <a href="" class="d-inline">{{ lifeform.author.username }}</a>, 
+            <a href="{{ path('user', {id: lifeform.author.id}) }}" class="d-inline">{{ lifeform.author.username }}</a>, 
             the {{ lifeform.createdAt|date('d-m-Y') }}
             {% if lifeform.updatedAt != null %}
             , updated the  {{ lifeform.updatedAt|date('d-m-Y') }}  at  {{ lifeform.updatedAt|date('H:i') }}
@@ -42,7 +42,7 @@
     {% for report in lifeform.reportlifeforms %}
         <article class="report">
             <h3>Report from
-                <a href="" class="d-inline">{{ report.author.username }}</a>, 
+                <a href="{{ path('user', {id: report.author.id}) }}" class="d-inline">{{ report.author.username }}</a>, 
                 the {{ report.createdAt|date('d-m-Y') }} at {{ report.createdAt|date('H:i') }}
                 {% if report.updatedAt != null %}
                 , updated the  {{ report.updatedAt|date('d-m-Y') }}  at  {{ report.updatedAt|date('H:i') }}

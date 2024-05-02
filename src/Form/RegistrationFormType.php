@@ -38,14 +38,6 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
             ->add('imageFile', VichFileType::class, [
                 'required' => false,
                 'allow_delete' => true,
@@ -54,6 +46,14 @@ class RegistrationFormType extends AbstractType
                 // 'image_uri' => true,
                 // 'imagine_pattern' => '...',
                 'asset_helper' => true,
+            ])
+            ->add('agreeTerms', CheckboxType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'You should agree to our terms.',
+                    ]),
+                ],
             ])
             ->add('submit', SubmitType::class)
         ;

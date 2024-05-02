@@ -12,7 +12,7 @@
         <p><span class="brunoAce">Condition :</span> {{ planet.lifeCondition }}</p>
 
         <p>created by 
-            <a href="" class="d-inline">{{ planet.author.username }}</a>, 
+            <a href="{{ path('user', {id: planet.author.id}) }}" class="d-inline">{{ planet.author.username }}</a>, 
             the {{ planet.createdAt|date('d-m-Y') }}
             {% if planet.updatedAt != null %}
             , updated the  {{ planet.updatedAt|date('d-m-Y') }}  at  {{ planet.updatedAt|date('H:i') }}
@@ -27,7 +27,6 @@
     <article>
         <h2>Description :</h2>
         <p> {{ planet.description }} </p>
-
 
         {% if app.user != null and app.user.id == planet.author.id %}
             <a href="{{ path('planet.edit', {id: planet.id}) }}" class="btn btn_outline btn_center">edit this planet</a>
@@ -61,7 +60,7 @@
     {% for report in planet.reportPlanets %}
         <article class="report">
             <h3>Report from
-                <a href="" class="d-inline">{{ report.author.username }}</a>, 
+                <a href="{{ path('user', {id: report.author.id}) }}" class="d-inline">{{ report.author.username }}</a>, 
                 the {{ report.createdAt|date('d-m-Y') }} at {{ report.createdAt|date('H:i') }}
                 {% if report.updatedAt != null %}
                 , updated the  {{ report.updatedAt|date('d-m-Y') }}  at  {{ report.updatedAt|date('H:i') }}

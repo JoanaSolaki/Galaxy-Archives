@@ -201,7 +201,7 @@ h2 {
     margin-top: 140px;
 }
 
-.lifeformHead img {
+.lifeformHead img, .userHead img {
     max-width: 50%;
     height: 100%;
     margin-top: 200px;
@@ -213,6 +213,17 @@ h2 {
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-around;
+}
+
+.userHeadInfo {
+    margin: 40px 0;
+    width: 50%;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.userHeadInfo a {
+    width: fit-content;
 }
 
 .planetLifeform {
@@ -318,7 +329,7 @@ form {
     border: none;
     height: 40px;
     margin-bottom: 20px;
-    box-shadow: rgba(2, 1, 6, 0.6) 3px 3px 6px 0px inset, rgba(2, 1, 6, 0.6) -3px -3px 6px 1px inset;
+    box-shadow: rgba(2, 1, 6, 0.6) 0px 3px 6px 0px inset;
 }
 
 .vich-file .form-control {

@@ -26,7 +26,7 @@
         <ul class="navbar-nav">
         {% if app.user %}
             <li class="nav-item d-flex">
-                <a href="{# {{ path('app_user', {'id' : app.user.id}) }} #}" class="btn" type="button">{{ app.user.username }}</a>
+                <a href="{{ path('user', {'id' : app.user.id}) }}" class="btn" type="button">{{ app.user.username }}</a>
                 <a href="{{ path('app_logout') }}" class="btn btn_full" type="button">Logout</a>
             </li>
         {% endif %}

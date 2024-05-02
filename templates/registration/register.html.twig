@@ -3,16 +3,16 @@
 {% block title %}Register{% endblock %}
 
 {% block main %}
-    <h1>Register</h1>
+    <section class="wrapper">
+        <h1>Register</h1>
 
-    {{ form_errors(registrationForm) }}
+        {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-        
-    {{ form_end(registrationForm) }}
+        {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Password'
+            }) }}
+        {{ form_end(registrationForm) }}
+    </section>
 {% endblock %}

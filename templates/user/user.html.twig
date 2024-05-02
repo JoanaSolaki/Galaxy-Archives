@@ -1,20 +1,89 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserController!{% endblock %}
+{% block title %} {{ user.username }} {% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block main %}
+{% if user.roles[0] == "ROLE_ANONYMOUS" or user.roles[0] == "ROLE_ADMIN" %}
+    <script>
+        window.location.href = "{{ path('homepage') }}";
+    </script>
+{% endif %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<section class="userHead wrapper d-flex">
+    <div class="userHeadInfo">
+        <h1 class="mb-9"> {{ user.username|upper }} </h1>
+        {% if app.user is not null and app.user.roles is not null %}
+            {% if user.id == app.user.id or app.user.roles[0] == "ROLE_ADMIN" %}
+                <a href="{ path('user.edit', {id: user.id}) }}" class="btn btn_outline">edit profile</a>
+                <form class="formDelete" method="post" action="{{ path('user.delete', {'id': user.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                    <button class="btn btn_full">delete profile</button>
+                </form>
+            {% endif %}
+        {% endif %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>D:/Cours/Simplon/Briefs/09-Galaxy_archives/galaxy_archives/src/Controller/UserController.php</code></li>
-        <li>Your template at <code>D:/Cours/Simplon/Briefs/09-Galaxy_archives/galaxy_archives/templates/user/index.html.twig</code></li>
-    </ul>
-</div>
+    </div>
+    {% if user.imageName == null %}
+        <img src="{{ asset('uploads/images/avatar/default.png') }}" alt="default avatar">
+        {% else %}
+            <img src={{ vich_uploader_asset(user, 'imageFile') }}  alt="image {{ user.username }}"></img>
+    {% endif %}
+
+</section>
+
+<section class="reports wrapper">
+    <h2>Planets created :</h2>
+    {% for planet in user.planets %}
+        <article class="report">
+            <h3>Report from
+                <a href="{{ path('planet.show', {'id': planet.id}) }}" class="d-inline">{{ planet.name }}</a>, 
+                the {{ planet.createdAt|date('d-m-Y') }} at {{ planet.createdAt|date('H:i') }}
+                {% if planet.updatedAt != null %}
+                , updated the  {{ planet.updatedAt|date('d-m-Y') }}  at  {{ planet.updatedAt|date('H:i') }}
+                {% endif %}
+            </h3>
+        </article>
+    {% endfor %}
+</section>
+
+<section class="reports wrapper">
+    <h2>Lifeforms created :</h2>
+    {% for lifeform in user.lifeforms %}
+        <article class="report">
+            <h3>Report from
+                <a href="{{ path('lifeform.show', {'id': lifeform.id}) }}" class="d-inline">{{ lifeform.name }}</a>, 
+                the {{ lifeform.createdAt|date('d-m-Y') }} at {{ lifeform.createdAt|date('H:i') }}
+                {% if lifeform.updatedAt != null %}
+                , updated the  {{ lifeform.updatedAt|date('d-m-Y') }}  at  {{ lifeform.updatedAt|date('H:i') }}
+                {% endif %}
+            </h3>
+        </article>
+    {% endfor %}
+</section>
+
+<section class="reports wrapper">
+    <h2>Reports created :</h2>
+    {% for reportPlanet in user.reportPlanets %}
+        <article class="report">
+            <h3>Report from
+                <a href="{{ path('planet.show', {'id': reportPlanet.planet.id}) }}" class="d-inline">{{ reportPlanet.planet.name }}</a>, 
+                the {{ reportPlanet.createdAt|date('d-m-Y') }} at {{ reportPlanet.createdAt|date('H:i') }}
+                {% if reportPlanet.updatedAt != null %}
+                , updated the  {{ reportPlanet.updatedAt|date('d-m-Y') }}  at  {{ reportPlanet.updatedAt|date('H:i') }}
+                {% endif %}
+            </h3>
+        </article>
+    {% endfor %}
+    {% for reportLifeform in user.reportLifeforms %}
+        <article class="report">
+            <h3>Report from
+                <a href="{{ path('lifeform.show', {'id': reportLifeform.lifeform.id}) }}" class="d-inline">{{ reportLifeform.lifeform.name }}</a>, 
+                the {{ reportLifeform.createdAt|date('d-m-Y') }} at {{ reportLifeform.createdAt|date('H:i') }}
+                {% if reportLifeform.updatedAt != null %}
+                , updated the  {{ reportLifeform.updatedAt|date('d-m-Y') }}  at  {{ reportLifeform.updatedAt|date('H:i') }}
+                {% endif %}
+            </h3>
+        </article>
+    {% endfor %}
+</section>
 {% endblock %}
