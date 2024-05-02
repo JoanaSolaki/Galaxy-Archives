@@ -10,7 +10,7 @@
 {% block main %}
 <section>
     {% for galaxy in galaxies %}
-    <article class="galaxyCard">
+    <article class="galaxyCard animate">
         <img src={{ vich_uploader_asset(galaxy, 'imageFile') }}  alt="image galaxy"></img>
         <div class="galaxyInfo">
             <h2> {{ galaxy.name }} </h2>

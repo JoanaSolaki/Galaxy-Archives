@@ -100,6 +100,11 @@ h2 {
     font-family: "Comfortaa", sans-serif;
     margin: auto 4px;
     text-transform: capitalize;
+    transition: 300ms ease-out;
+}
+
+.navbar a:hover {
+    color: var(--white);
 }
 
 /* HEADER */
@@ -398,3 +403,20 @@ footer p {
     left: 50%;
     transform: translate(-50%,-50%);
 }
+
+/* ANIMATION */
+  @keyframes enter-animation {
+    0% {
+      transform: translateY(100px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .animate-animation {
+      animation: enter-animation 0.8s 1;
+    }
+  }

@@ -60,7 +60,7 @@
 <section class="reports wrapper">
     <h2>Reports :</h2>
     {% for report in planet.reportPlanets %}
-        <article class="report">
+        <article class="report animate">
             <h3>Report from
                 <a href="{{ path('user', {id: report.author.id}) }}" class="d-inline">{{ report.author.username }}</a>, 
                 the {{ report.createdAt|date('d-m-Y') }} at {{ report.createdAt|date('H:i') }}
@@ -81,6 +81,6 @@
             {% endif %}
         </article>
     {% endfor %}
-    <a href="{{ path('planet.report.add', {id: planet.id}) }}" class="btn btn_outline btn_center">create a report</a>
+    <a href="{{ path('planet.report.add', {id: planet.id}) }}" class="btn btn_outline btn_center animate">create a report</a>
 </section>
 {% endblock %}

@@ -13,9 +13,3 @@ items.forEach((el) => {
         next = next.nextElementSibling
     }
 })
-
-document.querySelectorAll('img').forEach(img => {
-    img.ondragstart = function() {
-        return false;
-    };
-});
