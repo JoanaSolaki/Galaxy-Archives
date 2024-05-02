@@ -1,0 +1,89 @@
+@media (max-width: 1250px) { 
+    .galaxyInfo {
+        width: 40%;
+    }
+}
+
+@media (max-width: 960px) { 
+    .wrapper {
+        padding: 40px;
+    }
+    .galaxyInfo {
+        width: 50%;
+    }
+    .galaxyHead h1 {
+        left: 2%;
+        bottom: -2.4%
+    }      
+    .homepage h1 {
+        left: 50%;
+    }
+}
+
+@media (max-width: 770px) { 
+    h1 {
+        font-size: 5em;
+      }
+    .galaxyInfo {
+        width: 80%;
+    }
+    .planetCard {
+        width: 100%;
+    }
+    .form-control, .form-select, .form-control:focus, .form-control::placeholder {
+        height: 60px;
+    }
+    .collapsed, .collapse {
+        background-color: none!important;
+    }
+    .navbar-collapse {
+        background-color: var(--primaryColor);
+        padding: 20px;
+    }
+    .nav-item a.btn {
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 560px) { 
+    h1, h2, h3 {
+        word-break: break-word;
+    }
+    h1 {
+        font-size: 4em;
+    }
+    .galaxyCard h2 {
+        font-size: 2.4em;
+    }
+    .galaxyHead h1 {
+        font-size: 3em;
+    }
+    .planetHeadInfo h1, .lifeformHeadInfo h1, .userHeadInfo h1 {
+        font-size: 2.2em;
+    }
+    .planetHeadInfo, .lifeformHeadInfo {
+        margin: 0;
+        width: 100%;
+        flex-flow: column wrap;
+    }
+    .planetHead, .planetLifeform, .lifeformHead , .userHead {
+        flex-flow: wrap;
+        margin: 0;
+    }
+    .carousel {
+        margin: 0 -5%;
+    }
+    .lifeformHead img, .userHead img, .planetHead img {
+        max-width: 100%;
+        margin-top: 0;
+    }
+    .planetLifeformInfo, .planetLifeform .galery {
+        width: 100%;
+    }
+    form {
+        max-width: 400px;
+    }
+    .galery {
+        width: 44%;
+    }
+}

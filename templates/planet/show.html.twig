@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} {{ planet.name }} {% endblock %}
+{% block title %} {{ planet.name|capitalize }} {% endblock %}
 
 
 {% block main %}
@@ -21,7 +21,7 @@
 
     </div>
 
-    <img src={{ vich_uploader_asset(planet, 'imageFile') }}  alt="image planet"></img>
+    <img src={{ vich_uploader_asset(planet, 'imageFile') }}  alt="image {{ planet.name }}"></img>
 </section>
 <section class="planetBody wrapper">
     <article>

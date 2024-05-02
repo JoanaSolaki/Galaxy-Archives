@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} {{ galaxy.name }} {% endblock %}
+{% block title %} {{ galaxy.name|capitalize }} {% endblock %}
 
 {% block main %}
 <section class="galaxyHead">
-    <img src={{ vich_uploader_asset(galaxy, 'imageFile') }}  alt="image galaxy"></img>
+    <img src={{ vich_uploader_asset(galaxy, 'imageFile') }}  alt="image {{ galaxy.name }}"></img>
     <h1> {{ galaxy.name|upper }} </h1>
 </section>
 
@@ -27,7 +27,7 @@
                     <div class="carousel-item  {{ loop.index == 3 ? 'active' : '' }}">
                         <div class="card planetCard">
                             <div class="card-img planetImg">
-                                <img src={{ vich_uploader_asset(planet, 'imageFile') }} class="d-block w-100" alt="image planet"></img>
+                                <img src={{ vich_uploader_asset(planet, 'imageFile') }} class="d-block w-100" alt="image {{ planet.name }}"></img>
                             </div>
                             <div class="planetInfo">
                                 <h3>{{ planet.name|upper }}</h3>
@@ -61,7 +61,7 @@
             </div>
         </div>
 
-        <a href="" class="btn btn_outline btn_center">report a planet</a>
+        <a href="{{ path('planet.add') }}" class="btn btn_outline btn_center">report a planet</a>
     </article>
 </section>
 {% endblock %}

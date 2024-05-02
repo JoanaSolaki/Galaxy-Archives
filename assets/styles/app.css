@@ -16,6 +16,11 @@ a, abbr {
     display: block;
 }
 
-img {
-    -webkit-user-drag: none;
+ul {
+    padding-left: 0;
+}
+
+ul li {
+    list-style: none;
+    line-height: 2em;
 }

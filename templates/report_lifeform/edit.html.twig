@@ -9,8 +9,10 @@
         window.location.href = "{{ path('app_login') }}";
     </script>
 {% endif %}
+    <section class="wrapper">
 
-    <h1>Edit report</h1>
+        <h1>Edit report</h1>
 
-    {{ include('report_lifeform/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('report_lifeform/_form.html.twig', {'button_label': 'Update'}) }}
+    </section>
 {% endblock %}

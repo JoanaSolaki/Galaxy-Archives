@@ -9,12 +9,9 @@
         window.location.href = "{{ path('app_login') }}";
     </script>
 {% endif %}
+    <section class="wrapper">
+        <h1>Create planet</h1>
 
-
-<section class="wrapper">
-    <h1>Create planet</h1>
-
-    {{ include('planet/_form.html.twig') }}
-</section>
-
+        {{ include('planet/_form.html.twig') }}
+    </section>
 {% endblock %}

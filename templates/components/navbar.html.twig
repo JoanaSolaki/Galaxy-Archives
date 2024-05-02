@@ -23,10 +23,12 @@
           <a class="nav-link" href="{{ path('lifeform') }}">Lifeforms</a>
         </li>
       </ul>
-        <ul class="navbar-nav">
+      <ul class="navbar-nav">
         {% if app.user %}
             <li class="nav-item d-flex">
                 <a href="{{ path('user', {'id' : app.user.id}) }}" class="btn" type="button">{{ app.user.username }}</a>
+            </li>
+            <li class="nav-item d-flex">
                 <a href="{{ path('app_logout') }}" class="btn btn_full" type="button">Logout</a>
             </li>
         {% endif %}
@@ -34,6 +36,8 @@
         {% if app.user == null %}
             <li class="nav-item d-flex">
                 <a href="{{ path('app_login') }}" class="btn btn_outline" type="button">Sign-in</a>
+            </li>  
+            <li class="nav-item d-flex">
                 <a href="{{ path('app_register') }}" class="btn btn_full nav-link" type="button">Sign-up</a>
             </li>
         {% endif %}

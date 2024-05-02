@@ -9,9 +9,9 @@
         window.location.href = "{{ path('app_login') }}";
     </script>
 {% endif %}
+    <section class="wrapper">
+        <h1>Create Lifeform</h1>
 
-    <h1>Create Lifeform</h1>
-
-    {{ include('lifeform/_form.html.twig') }}
-
+        {{ include('lifeform/_form.html.twig') }}
+    </section>
 {% endblock %}

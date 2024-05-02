@@ -8,7 +8,7 @@
     <h1>Lifeforms</h1> 
 
     <a href="" class="btn btn_outline mt-4 mb-4">filter by</a>
-    <article class="d-flex flex-wrap">
+    <article class="d-flex flex-wrap justify-content-center">
         {% for lifeform in lifeforms %}
             <div class="galery">
                 <img src={{ vich_uploader_asset(lifeform, 'imageFile') }}  alt="image {{ lifeform.name }}" class="galeryImg"></img>

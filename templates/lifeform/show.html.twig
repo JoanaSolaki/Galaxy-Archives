@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} {{ lifeform.name }} {% endblock %}
+{% block title %} {{ lifeform.name|capitalize }} {% endblock %}
 
 {% block main %}
 <section class="lifeformHead wrapper d-flex">
@@ -17,9 +17,8 @@
             , updated the  {{ lifeform.updatedAt|date('d-m-Y') }}  at  {{ lifeform.updatedAt|date('H:i') }}
             {% endif %}
         </p>
-
     </div>
-    <img src={{ vich_uploader_asset(lifeform, 'imageFile') }}  alt="image lifeform"></img>
+    <img src={{ vich_uploader_asset(lifeform, 'imageFile') }}  alt="image {{ lifeform.name }}"></img>
 </section>
 
 <section class="lifeformBody wrapper">

@@ -21,6 +21,11 @@
     left: 30%;
     width: 100%;
     mix-blend-mode: color-dodge;
+    opacity: 40%;
+}
+
+.planetInfo ul, .planetInfo a {
+    margin: 40px 10px 0px 10px;
 }
 
 .carousel-item a {
@@ -30,10 +35,8 @@
 
 .planetCard h3 {
     text-align: center;
-}
-
-.planetInfo li {
-    list-style-type: none;
+    font-size: 1.5em;
+    margin-bottom: 20px;
 }
 
 @media (max-width: 767px) {

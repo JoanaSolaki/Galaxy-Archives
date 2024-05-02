@@ -8,7 +8,7 @@
 <section>
     {% for galaxy in galaxies %}
     <article class="galaxyCard">
-        <img src={{ vich_uploader_asset(galaxy, 'imageFile') }}  alt="image galaxy"></img>
+        <img src={{ vich_uploader_asset(galaxy, 'imageFile') }}  alt="image {{ galaxy.name }}"></img>
         <div class="galaxyInfo">
             <h2> {{ galaxy.name }} </h2>
             <p class="brunoAce">Current planet</p>
