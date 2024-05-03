@@ -9,14 +9,15 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('planet')]
+#[Route('')]
 class PlanetController extends AbstractController
 {
-    #[Route('/add', name: 'planet.add', methods: ['GET', 'POST'])]
+    #[Route('planet/add', name: 'planet.add', methods: ['GET', 'POST'])]
     public function add(Request $request, EntityManagerInterface $entityManager, Security $security): Response
     {
         $planet = new Planet();
@@ -42,7 +43,7 @@ class PlanetController extends AbstractController
         ]);
     }
 
-    #[Route('/', name: 'planet')]
+    #[Route('/planet', name: 'planet')]
     public function index(PlanetRepository $planetRepository): Response
     {
         $planets = $planetRepository->findAll();
@@ -51,7 +52,7 @@ class PlanetController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'planet.show')]
+    #[Route('planet/{id}', name: 'planet.show')]
     public function show(int $id, PlanetRepository $planetRepository): Response
     {
         $planet = $planetRepository->find($id);
@@ -61,7 +62,25 @@ class PlanetController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'planet.edit', methods: ['GET', 'POST'])]
+    #[Route('planet/filter/{type}', name: 'planet.filter', methods: ['GET'])]
+    public function filterByType(Request $request, PlanetRepository $planetRepository): JsonResponse
+    {
+        $type = $request->get('type');
+        // $planets = $planetRepository->findTypePlanet($type);
+        $planets = $planetRepository->findBy(['type' => $type]);
+
+        $planetData = array_map(function ($planet) {
+            return [
+                'id' => $planet->getId(),
+                'name' => $planet->getName(),
+                'image' => $planet->getImageName(),
+            ];
+        }, $planets);
+
+        return $this->json($planetData);
+    }
+
+    #[Route('planet/{id}/edit', name: 'planet.edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Planet $planet, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(PlanetType::class, $planet);
@@ -84,7 +103,7 @@ class PlanetController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/delete', name: 'planet.delete', methods: ['POST'])]
+    #[Route('planet/{id}/delete', name: 'planet.delete', methods: ['POST'])]
     public function delete(Request $request, Planet $planet, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$planet->getId(), $request->getPayload()->get('_token'))) {

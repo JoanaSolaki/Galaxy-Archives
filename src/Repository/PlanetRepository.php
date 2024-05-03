@@ -55,4 +55,13 @@ class PlanetRepository extends ServiceEntityRepository
 
         return $qb->getResult();
     }
+
+    public function findTypePlanet($type): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.type = :type')
+            ->setParameter('type', $type)
+            ->getQuery()
+            ->getResult();
+    }
 }

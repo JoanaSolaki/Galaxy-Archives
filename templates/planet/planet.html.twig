@@ -7,8 +7,19 @@
 <section class="wrapper">
     <h1>Planets</h1>
 
-    <a href="" class="btn btn_outline mt-4 mb-4">filter by</a>
-    <article class="d-flex flex-wrap justify-content-center">
+    {# <a href="" class="btn btn_outline mt-4 mb-4">filter by</a> #}
+
+    <div id="filter-buttons">
+        <button class="btn btn_outline" data-type="Exoplanet" id="exoplanet">Exoplanet</button>
+        <button class="btn btn_outline" data-type="Gas planet">Gas planet</button>
+        <button class="btn btn_outline" data-type="Lava planet">Lava planet</button>
+        <button class="btn btn_outline" data-type="Ice planet">Ice planet</button>
+        <button class="btn btn_outline" data-type="Iron planet">Iron planet</button>
+        <button class="btn btn_outline" data-type="Helium planet">Helium planet</button>
+        <button class="btn btn_outline" data-type="Chthonian planet">Chthonian planet</button>
+    </div>
+
+    <article class="d-flex flex-wrap justify-content-center" id="planetsGalery">
         {% for planet in planets %}
             <div class="galery">
                 <img src={{ vich_uploader_asset(planet, 'imageFile') }}  alt="image {{ planet.name }}" class="galeryImg"></img>
