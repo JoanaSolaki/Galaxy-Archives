@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[Vich\Uploadable]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity('username', message: 'This username is already taken')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -37,8 +38,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?string $imageName = null;
 
+    #[Assert\Length(min: 6)]
+    #[Assert\Regex(
+        '/^[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+$/', 
+        message: "The characters entered are not correct.")]
     #[ORM\Column(length: 180)]
-    private ?string $email = null;
+    private string $email = '';
 
     /**
      * @var list<string> The user roles
@@ -82,8 +87,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: ReportLifeform::class, mappedBy: 'author')]
     private Collection $reportLifeforms;
 
+    #[Assert\Length(min: 6)]
+    #[Assert\Regex(
+        '/^[a-zA-Z0-9_-]{3,15}$/', 
+        message: "The characters entered are not correct.")]
     #[ORM\Column(length: 100)]
-    private ?string $username = null;
+    private string $username = '';
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updated_at = null;

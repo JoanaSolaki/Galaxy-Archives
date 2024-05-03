@@ -64,6 +64,7 @@ class GalaxyCrudController extends AbstractCrudController implements EventSubscr
 
         if ($entity instanceof Galaxy) {
             $entity->setCreatedAt(new DateTime());
+            $entity->setAuthor($this->getUser());
         }
     }
 

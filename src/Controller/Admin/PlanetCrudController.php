@@ -44,24 +44,26 @@ class PlanetCrudController extends AbstractCrudController implements EventSubscr
                 "Hostile" => "Hostile",
                 "Neutral" => "Neutral",
                 "Livable" => "Livable"
-            ]),
+            ])
+            ->setRequired(true),
             TextareaField::new('description'),
             DateField::new('created_at')
             ->hideOnForm(),
             DateField::new('updated_at')
             ->hideOnForm(),
             TextField::new('imageFile')->setFormType(VichImageType::class)->onlyOnForms(),
-            ImageField::new('imageName')
-                ->setBasePath('/uploads/images/planets')
-                ->setUploadDir('/public')
-                ->onlyOnIndex(),
             AssociationField::new('galaxy')
-            ->setCrudController(GalaxyCrudController::class),
+            ->setCrudController(GalaxyCrudController::class)
+            ->setRequired(true),
             AssociationField::new('lifeforms')
             ->setCrudController(LifeformCrudController::class)
             ->onlyOnForms(),
             AssociationField::new('author')
             ->setCrudController(UserCrudController::class)
+            ->onlyOnIndex(),
+            ImageField::new('imageName')
+            ->setBasePath('/uploads/images/planets')
+            ->setUploadDir('/public')
             ->onlyOnIndex(),
         ];
     }
@@ -79,6 +81,7 @@ class PlanetCrudController extends AbstractCrudController implements EventSubscr
 
         if ($entity instanceof Planet) {
             $entity->setCreatedAt(new DateTime());
+            $entity->setAuthor($this->getUser());
         }
     }
 

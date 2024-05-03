@@ -34,7 +34,8 @@ class LifeformCrudController extends AbstractCrudController implements EventSubs
                 "Terrestrial" => "Terrestrial",
                 "Aerial" => "Aerial"
             ])
-            ->renderAsBadges(),
+            ->renderAsBadges()
+            ->setRequired(true),
             ChoiceField::new('behavior')
             ->setChoices([
                 "Hostile" => "Hostile",
@@ -48,15 +49,16 @@ class LifeformCrudController extends AbstractCrudController implements EventSubs
             DateField::new('updated_at')
             ->hideOnForm(),
             TextField::new('imageFile')->setFormType(VichImageType::class)->onlyOnForms(),
-            ImageField::new('imageName')
-                ->setBasePath('/uploads/images/lifeform')
-                ->setUploadDir('/public')
-                ->onlyOnIndex(),
             AssociationField::new('planet')
             ->setCrudController(PlanetCrudController::class)
-            ->onlyOnForms(),
+            ->onlyOnForms()
+            ->setRequired(true),
             AssociationField::new('author')
             ->setCrudController(UserCrudController::class)
+            ->onlyOnIndex(),
+            ImageField::new('imageName')
+            ->setBasePath('/uploads/images/lifeform')
+            ->setUploadDir('/public')
             ->onlyOnIndex(),
         ];
     }

@@ -7,12 +7,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: GalaxyRepository::class)]
 #[Vich\Uploadable]
+#[UniqueEntity('name', message: 'This name is already taken')]
 class Galaxy
 {
     #[ORM\Id]
@@ -41,14 +43,20 @@ class Galaxy
     #[ORM\OneToMany(targetEntity: Planet::class, mappedBy: 'galaxy')]
     private Collection $planets;
 
+    #[Assert\Length(min: 6)]
+    #[Assert\Regex(
+        '/^[a-zA-Z0-9_-]{3,15}$/', 
+        message: "The characters entered are not correct.")]
     #[ORM\Column(length: 100)]
-    private ?string $name = null;
+    private string $name = '';
 
+    #[Assert\Length(min: 20)]
     #[ORM\Column(length: 1500)]
-    private ?string $particularities = null;
+    private string $particularities = '';
 
+    #[Assert\Length(min: 20)]
     #[ORM\Column(length: 1500)]
-    private ?string $description = null;
+    private string $description = '';
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $created_at = null;

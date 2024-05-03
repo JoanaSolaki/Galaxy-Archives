@@ -45,4 +45,14 @@ class PlanetRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findLatestPlanets(int $limit = 6): array
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->orderBy('p.created_at', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery();
+
+        return $qb->getResult();
+    }
 }

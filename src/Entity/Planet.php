@@ -7,12 +7,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PlanetRepository::class)]
 #[Vich\Uploadable]
+#[UniqueEntity('name', message: 'This name is already taken')]
 class Planet
 {
     #[ORM\Id]
@@ -50,17 +52,26 @@ class Planet
     #[ORM\OneToMany(targetEntity: ReportPlanet::class, mappedBy: 'planet')]
     private Collection $reportPlanets;
 
+    #[Assert\Length(min: 2)]
+    #[Assert\Regex(
+        '/^[a-zA-Z0-9_-]{3,15}$/', 
+        message: "The characters entered are not correct.")]
     #[ORM\Column(length: 100)]
-    private ?string $name = null;
+    private string $name = '';
 
+    #[Assert\NotBlank()]
+    #[Assert\Choice(['Exoplanet', 'Gas planet', 'Lava planet', 'Ice planet', 'Iron planet', 'Helium planet', 'Chthonian planet'])]
     #[ORM\Column(length: 100)]
     private ?string $type = null;
 
+    #[Assert\NotBlank()]
+    #[Assert\Choice(['Hostile', 'Neutral', 'Livable'])]
     #[ORM\Column(length: 100)]
     private ?string $lifeCondition = null;
 
+    #[Assert\Length(min: 20)]
     #[ORM\Column(length: 1500)]
-    private ?string $description = null;
+    private string $description = '';
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $created_at = null;

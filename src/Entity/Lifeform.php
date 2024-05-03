@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Entity\File as EmbeddedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -14,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: LifeformRepository::class)]
 #[Vich\Uploadable]
+#[UniqueEntity('name', message: 'This name is already taken')]
 class Lifeform
 {
     #[ORM\Id]
@@ -48,17 +50,26 @@ class Lifeform
     #[ORM\OneToMany(targetEntity: ReportLifeform::class, mappedBy: 'lifeform')]
     private Collection $reportLifeforms;
 
+    #[Assert\Length(min: 2)]
+    #[Assert\Regex(
+        '/^[a-zA-Z0-9_-]{3,15}$/', 
+        message: "The characters entered are not correct.")]
     #[ORM\Column(length: 100)]
-    private ?string $name = null;
+    private string $name = '';
 
+    #[Assert\NotBlank()]
+    #[Assert\Choice(['Aquatic', 'Terrestrial', 'Aerial'])]
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $species = null;
 
+    #[Assert\NotBlank()]
+    #[Assert\Choice(['Hostile', 'Neutral', 'Friendly'])]
     #[ORM\Column(length: 100)]
     private ?string $behavior = null;
 
+    #[Assert\Length(min: 20)]
     #[ORM\Column(length: 1500)]
-    private ?string $description = null;
+    private string $description = '';
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $created_at = null;

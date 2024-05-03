@@ -3,12 +3,16 @@
 namespace App\Controller\Admin;
 
 use App\Entity\ReportPlanet;
+use DateTime;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
+use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 
-class ReportPlanetCrudController extends AbstractCrudController
+class ReportPlanetCrudController extends AbstractCrudController implements EventSubscriberInterface
 {
     public static function getEntityFqcn(): string
     {
@@ -19,7 +23,7 @@ class ReportPlanetCrudController extends AbstractCrudController
     {
         return [
             AssociationField::new('planet')
-            ->setCrudController(PlanetCrudController::class),
+            ->setCrudController(PlanetCrudController::class)            ->setRequired(true),
             TextareaField::new('body'),
             DateField::new('created_at')
             ->hideOnForm(),
@@ -29,5 +33,30 @@ class ReportPlanetCrudController extends AbstractCrudController
             ->setCrudController(UserCrudController::class)
             ->onlyOnIndex(),
         ];
+    }
+
+    public static function getSubscribedEvents()
+    {
+        return [
+            BeforeEntityPersistedEvent::class => ["beforePersist"],
+            BeforeEntityUpdatedEvent::class => ["beforeUpdate"]
+        ];
+    }
+
+    public function beforePersist (BeforeEntityPersistedEvent $event) {
+        $entity = $event->getEntityInstance();
+
+        if ($entity instanceof ReportPlanet) {
+            $entity->setCreatedAt(new DateTime());
+            $entity->setAuthor($this->getUser());
+        }
+    }
+
+    public function beforeUpdate (BeforeEntityUpdatedEvent $event) {
+        $entity = $event->getEntityInstance();
+
+        if ($entity instanceof ReportPlanet) {
+            $entity->setUpdatedAt(new DateTime());
+        }
     }
 }

@@ -19,7 +19,7 @@ class GalaxyController extends AbstractController
     public function indexHome(GalaxyRepository $galaxyRepository, PlanetRepository $planetRepository): Response
     {
         $galaxies = $galaxyRepository->findAll();
-        $planets = $planetRepository->findAll();
+        $planets = $planetRepository->findLatestPlanets();
         return $this->render('homepage.html.twig', [
             'galaxies' => $galaxies,
             'planets' => $planets,

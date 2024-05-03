@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ReportLifeformRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ReportLifeformRepository::class)]
 class ReportLifeform
@@ -20,8 +21,9 @@ class ReportLifeform
     #[ORM\ManyToOne(inversedBy: 'reportLifeforms')]
     private ?User $author = null;
 
+    #[Assert\Length(min: 20)]
     #[ORM\Column(length: 1500)]
-    private ?string $body = null;
+    private string $body = '';
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $created_at = null;
