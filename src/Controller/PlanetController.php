@@ -66,7 +66,6 @@ class PlanetController extends AbstractController
     public function filterByType(Request $request, PlanetRepository $planetRepository): JsonResponse
     {
         $type = $request->get('type');
-        // $planets = $planetRepository->findTypePlanet($type);
         $planets = $planetRepository->findBy(['type' => $type]);
 
         $planetData = array_map(function ($planet) {

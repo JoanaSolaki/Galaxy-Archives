@@ -30,7 +30,7 @@ document.querySelectorAll('#filter-buttons button').forEach(button => {
             planets.forEach(planet => {
                 html += `
                     <div class="galery">
-                        <img src="uploads/images/planets/${planet.image}" alt="image ${planet.name}" class="galeryImg">
+                        <img src="/uploads/images/planets/${planet.image}" alt="image ${planet.name}" class="galeryImg">
                         <div class="galeryLink">
                             <a href="/planet/${planet.id}" class="brunoAce">See ${planet.name}</a>
                         </div>
@@ -46,4 +46,36 @@ document.querySelectorAll('#filter-buttons button').forEach(button => {
     });
 });
 
+document.querySelectorAll('#filter-buttons-lifeform button').forEach(button => {
+    button.addEventListener('click', async () => {
+        try {
+            const valueType = button.getAttribute('data-type');
+            const response = await fetch('filter/' + valueType);
+            if (!response.ok) {
+                throw new Error('Error fetching data');
+            }
+            const lifeforms = await response.json();
 
+            let html = '';
+            lifeforms.forEach(lifeform => {
+                html += `
+                    <div class="galery">
+                        <img src="/uploads/images/lifeform/${lifeform.image}" alt="image ${lifeform.name}" class="galeryImg">
+                        <div class="galeryLink">
+                            <a href="/lifeform/${lifeform.id}" class="brunoAce">See ${lifeform.name}</a>
+                        </div>
+                    </div>
+                `;
+            });
+
+            const gallery = document.querySelector('#lifeformsGalery');
+            gallery.innerHTML = html;
+        } catch (error) {
+            console.error('Error fetching planets:', error);
+            if ('status' in response) {
+                console.error('Status:', response.status);
+                console.error('Status Text:', response.statusText);
+            }
+        }
+    });
+});

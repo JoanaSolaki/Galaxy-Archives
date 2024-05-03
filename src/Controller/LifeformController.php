@@ -9,14 +9,15 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('lifeform')]
+#[Route('')]
 class LifeformController extends AbstractController
 {
-    #[Route('/create', name: 'lifeform.create', methods: ['GET', 'POST'])]
+    #[Route('lifeform/create', name: 'lifeform.create', methods: ['GET', 'POST'])]
     public function add(Request $request, EntityManagerInterface $entityManager, Security $security): Response
     {
         $lifeform = new Lifeform();
@@ -42,7 +43,7 @@ class LifeformController extends AbstractController
         ]);
     }
 
-    #[Route('/', name: 'lifeform')]
+    #[Route('lifeform/', name: 'lifeform')]
     public function index(LifeformRepository $lifeformRepository): Response
     {
         $lifeforms = $lifeformRepository->findAll();
@@ -51,7 +52,7 @@ class LifeformController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'lifeform.show')]
+    #[Route('lifeform/{id}', name: 'lifeform.show')]
     public function show(int $id, LifeformRepository $lifeformRepository): Response
     {
         $lifeform = $lifeformRepository->find($id);
@@ -61,7 +62,25 @@ class LifeformController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'lifeform.edit', methods: ['GET', 'POST'])]
+    #[Route('lifeform/filter/{species}', name: 'lifeform.filter', methods: ['GET'])]
+    public function filterByType(Request $request, LifeformRepository $lifeformRepository): JsonResponse
+    {
+        $species = $request->get('species');
+        $lifeforms = $lifeformRepository->findBy(['species' => $species]);
+
+        $lifeformData = array_map(function ($lifeform) {
+            return [
+                'id' => $lifeform->getId(),
+                'name' => $lifeform->getName(),
+                'image' => $lifeform->getImageName(),
+            ];
+        }, $lifeforms);
+
+        return $this->json($lifeformData);
+    }
+
+
+    #[Route('lifeform/{id}/edit', name: 'lifeform.edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Lifeform $lifeform, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(LifeformType::class, $lifeform);
@@ -85,7 +104,7 @@ class LifeformController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/delete', name: 'lifeform.delete', methods: ['POST'])]
+    #[Route('lifeform/{id}/delete', name: 'lifeform.delete', methods: ['POST'])]
     public function delete(Request $request, Lifeform $lifeform, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$lifeform->getId(), $request->getPayload()->get('_token'))) {
