@@ -51,6 +51,6 @@ class RegisterControllerTest extends WebTestCase
 
         $this->assertResponseStatusCodeSame(422);
 
-        fwrite(STDOUT, "The registration form submission failed with invalid data.\n");
+        print_r("The registration form submission failed with invalid data.");
     }
 }
