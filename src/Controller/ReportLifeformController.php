@@ -4,9 +4,12 @@ namespace App\Controller;
 
 use App\Entity\ReportLifeform;
 use App\Form\ReportLifeformType;
+use App\Repository\LifeformRepository;
 use App\Repository\ReportLifeformRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -15,13 +18,17 @@ use Symfony\Component\Routing\Attribute\Route;
 class ReportLifeformController extends AbstractController
 {
     #[Route('/{id}/add', name: 'lifeform.report.add', methods: ['GET', 'POST'])]
-    public function add(int $id, Request $request, EntityManagerInterface $entityManager): Response
+    public function add(int $id, Request $request, EntityManagerInterface $entityManager, Security $security, LifeformRepository $lifeformRepository): Response
     {
         $reportLifeform = new ReportLifeform();
         $form = $this->createForm(ReportLifeformType::class, $reportLifeform);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $reportLifeform->setCreatedAt(new DateTime());
+            $reportLifeform->setAuthor($security->getUser());
+            $lifeFormReport = $lifeformRepository->find($id);
+            $reportLifeform->setLifeform($lifeFormReport);
             $entityManager->persist($reportLifeform);
             $entityManager->flush();
 
@@ -34,6 +41,7 @@ class ReportLifeformController extends AbstractController
         }
 
         return $this->render('report_lifeform/add.html.twig', [
+            'id' => $id,
             'report_lifeform' => $reportLifeform,
             'form' => $form,
         ]);
